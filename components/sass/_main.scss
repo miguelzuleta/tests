@@ -3,12 +3,16 @@ body {
 }
 
 main{
-	@include center();
-	padding: 20px;
-	background-color: $color2;
-	color: darken($color2);
+    display: flex;
 
-	h1 {
-		font-weight: bold;
-	}
+	> * {
+        width: 50vw;
+    }
+
+    iframe {
+        height: 100vh;
+        position: fixed;
+        right: 0;
+        overflow: hidden;
+    }
 }
