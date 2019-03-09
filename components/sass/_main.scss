@@ -6,7 +6,10 @@ main{
     display: flex;
 
 	> * {
-        width: 50vw;
+        width: 100vw;
+        position: absolute;
+        top: 0;
+        left: 0;
     }
 
     iframe {
@@ -14,5 +17,7 @@ main{
         position: fixed;
         right: 0;
         overflow: hidden;
+        pointer-events: none;
+        // opacity: 0.5;
     }
 }
