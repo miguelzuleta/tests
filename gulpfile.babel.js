@@ -111,7 +111,7 @@ gulp.task('js', () =>  {
 	browserify({
 			entries: 'components/js/main.js',
 			debug: showSourcemaps,
-			transform: [ babelify, reactify ]
+			transform: [ babelify ]
 		})
 		.bundle()
 		.pipe(source('components/js/main.js'))
