@@ -3,12 +3,13 @@
 let iframe = document.querySelector('iframe');
 
 iframe.onload = () => {
-	console.log('iframe loaded!')
-	scrollIframe();
+	// console.log('iframe loaded!')
+	// scrollIframe();
+    console.log(iframe.contentWindow.document)
 }
 
-let scrollIframe = () => {
-	window.addEventListener('scroll', () => {
-		iframe.contentWindow.scrollTo(0, window.pageYOffset);
-	})
-}
+// let scrollIframe = () => {
+// 	window.addEventListener('scroll', () => {
+// 		iframe.contentWindow.scrollTo(0, window.pageYOffset);
+// 	})
+// }
