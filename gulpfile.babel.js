@@ -16,7 +16,6 @@ import sourcemaps   from 'gulp-sourcemaps'
 
 import jsStylish    from 'jshint-stylish'
 import browserify   from 'browserify'
-import reactify     from 'reactify'
 import watchify     from 'watchify'
 import buffer       from 'vinyl-buffer'
 import source       from 'vinyl-source-stream'
