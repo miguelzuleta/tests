@@ -1,4 +1,6 @@
 'use strict'
+// npm i babel-plugin-transform-react-jsx react react-dom reactify
+// .babelrc "plugins": ["transform-react-jsx"]
 
 import gulp         from 'gulp'
 import htmlmin      from 'gulp-htmlmin'
@@ -16,7 +18,7 @@ import sourcemaps   from 'gulp-sourcemaps'
 
 import jsStylish    from 'jshint-stylish'
 import browserify   from 'browserify'
-import reactify     from 'reactify'
+// import reactify     from 'reactify'
 import watchify     from 'watchify'
 import buffer       from 'vinyl-buffer'
 import source       from 'vinyl-source-stream'
@@ -112,7 +114,7 @@ gulp.task('js', () =>  {
 	browserify({
 			entries: 'components/js/main.js',
 			debug: showSourcemaps,
-			transform: [ babelify, reactify ]
+			transform: [ babelify/*, reactify*/ ]
 		})
 		.bundle()
 		.pipe(source('components/js/main.js'))
