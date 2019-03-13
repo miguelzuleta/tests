@@ -2,29 +2,27 @@ $red: #CD2E3A;
 $blue: #0047A0;
 $PI: 3.1415;
 
+$flag-aspect-ratio: 2 / 3;
+
+// Original fancy math by Takeru Suzuki
 // https://github.com/terkel/mathsass/blob/master/dist/functions/_atan.scss
-@function atan ($x) {
+@function trigram-angle($x) {
 	$i: 24;
-	$sgn: 0;
 	$a: 0;
-	@if $x > 1 {
-		$sgn: 1;
-		$x: 1 / $x;
-	} @else if $x < -1 {
-		$sgn: -1;
-		$x: 1 / $x;
-	}
+	$x: 1 / $x;
+
 	@while $i > 0 {
 		$a: ($i * $i * $x * $x) / (2 * $i + 1 + $a);
 		$i: $i - 1;
 	}
-	@if $sgn > 0 {
-		@return  $PI / 2 - $x / (1 + $a);
-	} @else if $sgn < 0 {
-		@return -$PI / 2 - $x / (1 + $a);
-	} @else {
-		@return $x / (1 + $a);
-	}
+
+	@return ($PI / 2 - $x / (1 + $a)) * (180 / $PI);
 }
 
-@warn atan(3/2) * (180/$PI);
+$trigram-1: trigram-angle($flag-aspect-ratio);
+$trigram-2: 90 - $trigram-1;
+$trigram-3: 90 + $trigram-1;
+$trigram-4: 180 + $trigram-1;
+
+
+@warn $trigram-1 $trigram-2 $trigram-3 $trigram-4;
