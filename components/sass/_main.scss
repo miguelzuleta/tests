@@ -1,14 +1,60 @@
 body {
-	// background-color: $color1;
+	background-color: #111;
 }
 
-main{
-	@include center();
-	padding: 20px;
-	// background-color: $color2;
-	// color: darken($color2);
+main {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 
-	h1 {
-		font-weight: bold;
+.flag {
+	width: $flag-width;
+	height: $flag-height;
+	background-color: #FFF;
+
+	.taegeuk {
+		width: $taegeuk;
+		height: $taegeuk;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) rotate(#{$rotation-1});
+
+		.side {
+			width: $taegeuk;
+			height: $trigram-width;
+			border-radius: $taegeuk $taegeuk 0 0;
+
+			&:before {
+				content:'';
+				width: $trigram-width;
+				height: $trigram-width;
+				border-radius: $trigram-width;
+				position: absolute;
+				z-index: 1;
+			}
+		}
+
+		.positive {
+			background-color: $red;
+
+			&:before {
+				bottom: $trigram-width / 2;
+				background-color: $red;
+			}
+		}
+
+		.negative {
+			transform: rotate(180deg);
+			background-color: $blue;
+
+			&:before {
+				top: $trigram-width / 2;
+				background-color: $blue;
+			}
+		}
 	}
 }
