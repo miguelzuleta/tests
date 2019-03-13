@@ -1,2 +1,30 @@
-$color1: #222;
-$color2: #aaa;
+$red: #CD2E3A;
+$blue: #0047A0;
+$PI: 3.1415;
+
+// https://github.com/terkel/mathsass/blob/master/dist/functions/_atan.scss
+@function atan ($x) {
+	$i: 24;
+	$sgn: 0;
+	$a: 0;
+	@if $x > 1 {
+		$sgn: 1;
+		$x: 1 / $x;
+	} @else if $x < -1 {
+		$sgn: -1;
+		$x: 1 / $x;
+	}
+	@while $i > 0 {
+		$a: ($i * $i * $x * $x) / (2 * $i + 1 + $a);
+		$i: $i - 1;
+	}
+	@if $sgn > 0 {
+		@return  $PI / 2 - $x / (1 + $a);
+	} @else if $sgn < 0 {
+		@return -$PI / 2 - $x / (1 + $a);
+	} @else {
+		@return $x / (1 + $a);
+	}
+}
+
+@warn atan(3/2) * (180/$PI);
