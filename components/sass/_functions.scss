@@ -1,3 +1,14 @@
-@function darken($hex) {
-  @return $hex - 100;
+// Original fancy math by Takeru Suzuki
+// https://github.com/terkel/mathsass/blob/master/dist/functions/_atan.scss
+@function trigram-angle($x) {
+	$i: 24;
+	$a: 0;
+	$x: 1 / $x;
+
+	@while $i > 0 {
+		$a: ($i * $i * $x * $x) / (2 * $i + 1 + $a);
+		$i: $i - 1;
+	}
+
+	@return ($PI / 2 - $x / (1 + $a)) * (180 / $PI);
 }
