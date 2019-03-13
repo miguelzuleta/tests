@@ -1,6 +1,12 @@
-@mixin center(){
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+@mixin trigram-position($x, $y, $trans-origin, $negative: false) {
+	$multiplier: 1;
+
+	@if $negative == true {
+		$multiplier: -1;
+	}
+
+	#{$x}: $trigram-height * -1;
+	#{$y}: $trigram-width / 2 * -1;
+	transform-origin: $trans-origin center;
+	transform: rotate(#{$rotation-2 * $multiplier});
 }

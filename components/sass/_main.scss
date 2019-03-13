@@ -14,6 +14,7 @@ main {
 	width: $flag-width;
 	height: $flag-height;
 	background-color: #FFF;
+	position: relative;
 
 	.taegeuk {
 		width: $taegeuk;
@@ -55,6 +56,32 @@ main {
 				top: $trigram-width / 2;
 				background-color: $blue;
 			}
+		}
+	}
+
+	.trigram {
+		width: $trigram-width;
+		height: $trigram-height;
+		position: absolute;
+
+		&.geon {
+			@include trigram-position(top, left, bottom, true);
+			background-color: red;
+		}
+
+		&.ri {
+			@include trigram-position(bottom, left, top);
+			background-color: yellow;
+		}
+
+		&.gam {
+			@include trigram-position(top, right, bottom);
+			background-color: pink;
+		}
+
+		&.gon {
+			@include trigram-position(bottom, right, top, true);
+			background-color: orange;
 		}
 	}
 }

@@ -10,10 +10,8 @@ $elements-size-base: $flag-height / 2;
 $taegeuk: $elements-size-base;
 $trigram-width: $elements-size-base / 2;
 $trigram-height: $elements-size-base / 3;
-$trigram-weight: $elements-size-base / 12;
+$trigram-stroke-weight: $elements-size-base / 12;
 $trigram-stroke-spacing: $elements-size-base / 24;
 
 $rotation-1: trigram-angle($flag-aspect-ratio) * 1deg;
 $rotation-2: 90 - $rotation-1;
-$rotation-3: 90 + $rotation-1;
-$rotation-4: 180 + $rotation-1;
