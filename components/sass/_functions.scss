@@ -1,3 +1,17 @@
+@function strip-unit($number) {
+	@if type-of($number) == 'number' and not unitless($number) {
+		@return $number / ($number * 0 + 1);
+	}
+
+	@return $number;
+}
+
+@function sq($num) {
+	$numUnit: strip-unit($num);
+
+	@return $numUnit * $numUnit;
+}
+
 // Part of this fancy math came from Takeru Suzuki
 // https://github.com/terkel/mathsass/blob/master/dist/functions/_atan.scss
 @function trigram-angle($x) {
@@ -6,7 +20,7 @@
 	$x: 1 / $x;
 
 	@while $i > 0 {
-		$a: ($i * $i * $x * $x) / (2 * $i + 1 + $a);
+		$a: (sq($i) * sq($x)) / (2 * $i + 1 + $a);
 		$i: $i - 1;
 	}
 
@@ -14,6 +28,9 @@
 }
 
 @function sqrt ($x) {
+	$unit: unit($x);
+	$x: strip-unit($x);
+
 	@if $x < 0 {
 		@warn "Argument for `sqrt()` must be a positive number.";
 		@return null;
@@ -26,4 +43,8 @@
 	}
 
 	@return $ret;
+}
+
+@function flag-hypotenuse() {
+	@return sqrt(sq($flag-height) + sq($flag-width)) * ($flag-height * 0 + 1);;
 }

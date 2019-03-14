@@ -5,9 +5,6 @@ body {
 main {
 	width: 100vw;
 	height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 }
 
 .flag {
@@ -15,6 +12,28 @@ main {
 	height: $flag-height;
 	background-color: #FFF;
 	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	&:before, &:after {
+		content: '';
+		position: absolute;
+		width: $flag-width * 3;
+		height: 1px;
+		top: 50%;
+		left: 50%;
+		background-color: rgba(black, 0.5);
+		z-index: 2;
+	}
+
+	&:before {
+		transform: translate(-50%, -50%) rotate(#{$rotation-1 * -1});
+	}
+
+	&:after {
+		transform: translate(-50%, -50%) rotate($rotation-1);
+	}
 
 	.taegeuk {
 		width: $taegeuk;
@@ -23,6 +42,9 @@ main {
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%) rotate(#{$rotation-1});
+		border-radius: $taegeuk;
+
+		border: ($taegeuk / 4) solid rgba(black, 0.5);
 
 		.side {
 			width: $taegeuk;
@@ -63,6 +85,15 @@ main {
 		width: $trigram-width;
 		height: $trigram-height;
 		position: absolute;
+
+		&:before {
+			content: '';
+			width: 1px;
+			height: $trigram-height;
+			position: absolute;
+			left: 50%;
+			background-color: white;
+		}
 
 		&.geon {
 			@include trigram-position(top, left, bottom, true);

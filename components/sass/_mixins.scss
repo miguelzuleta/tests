@@ -5,8 +5,9 @@
 		$multiplier: -1;
 	}
 
-	#{$x}: $trigram-height * -1;
-	#{$y}: $trigram-width / 2 * -1;
+	#{$x}: 12.5%;
+	#{$y}: 20.9%;
+
 	transform-origin: $trans-origin center;
 	transform: rotate(#{$rotation-2 * $multiplier});
 }
