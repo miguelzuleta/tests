@@ -16,24 +16,24 @@ main {
 	left: 50%;
 	transform: translate(-50%, -50%);
 
-	&:before, &:after {
-		content: '';
-		position: absolute;
-		width: $flag-width * 3;
-		height: 1px;
-		top: 50%;
-		left: 50%;
-		background-color: rgba(black, 0.5);
-		z-index: 2;
-	}
+	// &:before, &:after {
+	// 	content: '';
+	// 	position: absolute;
+	// 	width: $flag-width * 3;
+	// 	height: 1px;
+	// 	top: 50%;
+	// 	left: 50%;
+	// 	background-color: rgba(black, 0.5);
+	// 	z-index: 2;
+	// }
 
-	&:before {
-		transform: translate(-50%, -50%) rotate(#{$rotation-1 * -1});
-	}
+	// &:before {
+	// 	transform: translate(-50%, -50%) rotate(#{$rotation-1 * -1});
+	// }
 
-	&:after {
-		transform: translate(-50%, -50%) rotate($rotation-1);
-	}
+	// &:after {
+	// 	transform: translate(-50%, -50%) rotate($rotation-1);
+	// }
 
 	.taegeuk {
 		width: $taegeuk;
@@ -44,7 +44,7 @@ main {
 		transform: translate(-50%, -50%) rotate(#{$rotation-1});
 		border-radius: $taegeuk;
 
-		border: ($taegeuk / 4) solid rgba(black, 0.5);
+		// border: ($taegeuk / 4) solid rgba(black, 0.5);
 
 		.side {
 			width: $taegeuk;
@@ -85,34 +85,47 @@ main {
 		width: $trigram-width;
 		height: $trigram-height;
 		position: absolute;
+		display: flex;
+		flex-wrap: wrap;
+		align-content: space-between;
+		justify-content: space-between;
 
-		&:before {
-			content: '';
-			width: 1px;
-			height: $trigram-height;
-			position: absolute;
-			left: 50%;
-			background-color: white;
+		// &:before {
+		// 	content: '';
+		// 	width: 1px;
+		// 	height: $trigram-height;
+		// 	position: absolute;
+		// 	left: 50%;
+		// 	background-color: white;
+		// }
+
+		.stroke {
+			background-color: #000;
+			height: $trigram-stroke-weight;
+
+			&.full {
+				width: $trigram-width;
+			}
+
+			&.half {
+				width: ($trigram-width - $trigram-stroke-spacing) / 2;
+			}
 		}
 
 		&.geon {
 			@include trigram-position(top, left, bottom, true);
-			background-color: red;
 		}
 
 		&.ri {
 			@include trigram-position(bottom, left, top);
-			background-color: yellow;
 		}
 
 		&.gam {
 			@include trigram-position(top, right, bottom);
-			background-color: pink;
 		}
 
 		&.gon {
 			@include trigram-position(bottom, right, top, true);
-			background-color: orange;
 		}
 	}
 }
