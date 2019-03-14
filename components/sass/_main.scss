@@ -16,25 +16,6 @@ main {
 	left: 50%;
 	transform: translate(-50%, -50%);
 
-	// &:before, &:after {
-	// 	content: '';
-	// 	position: absolute;
-	// 	width: $flag-width * 3;
-	// 	height: 1px;
-	// 	top: 50%;
-	// 	left: 50%;
-	// 	background-color: rgba(black, 0.5);
-	// 	z-index: 2;
-	// }
-
-	// &:before {
-	// 	transform: translate(-50%, -50%) rotate(#{$rotation-1 * -1});
-	// }
-
-	// &:after {
-	// 	transform: translate(-50%, -50%) rotate($rotation-1);
-	// }
-
 	.taegeuk {
 		width: $taegeuk;
 		height: $taegeuk;
@@ -43,8 +24,6 @@ main {
 		left: 50%;
 		transform: translate(-50%, -50%) rotate(#{$rotation-1});
 		border-radius: $taegeuk;
-
-		// border: ($taegeuk / 4) solid rgba(black, 0.5);
 
 		.side {
 			width: $taegeuk;
@@ -89,15 +68,6 @@ main {
 		flex-wrap: wrap;
 		align-content: space-between;
 		justify-content: space-between;
-
-		// &:before {
-		// 	content: '';
-		// 	width: 1px;
-		// 	height: $trigram-height;
-		// 	position: absolute;
-		// 	left: 50%;
-		// 	background-color: white;
-		// }
 
 		.stroke {
 			background-color: #000;
