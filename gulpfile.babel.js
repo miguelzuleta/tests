@@ -25,6 +25,7 @@ import source       from 'vinyl-source-stream'
 import babelify     from 'babelify'
 import fs           from 'fs'
 import { argv }     from 'yargs'
+import haml         from 'gulp-haml'
 
 
 let dir = './site/'
@@ -62,8 +63,9 @@ gulp.task('connect', () => {
 })
 
 gulp.task('html', () => {
-	gulp.src('components/html/*.html')
-		.pipe(include())
+	gulp.src('components/html/*.haml')
+		.pipe(haml())
+		// .pipe(include())
 		.pipe(htmlmin({
 			collapseWhitespace: minifyHMTL
 		}))
@@ -128,8 +130,21 @@ gulp.task('js', () =>  {
 gulp.task('watch', () => {
 	console.log('\n\nWatching for changes...\n\n')
 	gulp.watch('components/sass/*.scss', ['sass'])
-	gulp.watch('components/html/**/*.html', ['html'])
+	gulp.watch('components/html/**/*.haml', ['html'])
 	gulp.watch('components/js/*.js', ['js', 'lint'])
 })
 
 gulp.task('default', ['html', 'sass', 'js', 'lint', ...runConnect, ...runWatch])
+
+%svg(class="temp")
+   %polygon(id="star" points="39.1,189 99.9,144.4 161.8,189 138.9,117 199.7,71.9 124.2,71.9 99.9,0 76.7,71.9 0,71.9 62.1,117")
+
+#flag
+   .murica
+     .canton
+       - (1..9).each do |i|
+         .row
+           - (1..6).each do |i|
+             %svg(viewBox="0 0 200 200")
+               %use(xlink:href="#star")
+

@@ -1,101 +1,59 @@
 body {
-	background-color: #111;
+  background-color: #111;
 }
 
-main {
-	width: 100vw;
-	height: 100vh;
+.murica {
+  width: $flagL;
+  height: $flagH;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: repeating-linear-gradient(0deg,$MURICA_red,$MURICA_red $stripeH,$MURICA_white $stripeH,$MURICA_white $stripeH * 2);
 }
 
-.flag {
-	width: $flag-width;
-	height: $flag-height;
-	background-color: #FFF;
-	position: relative;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+.canton {
+  position: absolute;
+  top: 0;
+  left: -1px;
+  background-color: $MURICA_blue;
+  width: $cantonW;
+  height: $cantonH;
+}
 
-	.taegeuk {
-		width: $taegeuk;
-		height: $taegeuk;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%) rotate(#{$rotation-1});
-		border-radius: $taegeuk;
+.row {
+  position: absolute;
+  left: 0;
+  
+  @for $i from 0 through 8 {
+    &:nth-child(#{$i+1}) {
+      top: $i * $starSeparation_Vertical;
+    }
+  }
+  
+  &:nth-child(even) {
+    left: $starSeparation_Horiz / 2;
+    svg:last-child {
+      display: none;
+    }
+  }
+  
+  svg {
+    fill: $MURICA_white;
+    width: $starH;
+    height: $starH;
+    position: absolute;
+    top: 0;
+    transform: translate(($starSeparation_Horiz - $starH) - $starH / 2, ($starSeparation_Vertical) - $starH / 2);
 
-		.side {
-			width: $taegeuk;
-			height: $trigram-width;
-			border-radius: $taegeuk $taegeuk 0 0;
+    @for $i from 0 through 5 {
+      &:nth-child(#{$i+1}) {
+        left: $i * $starSeparation_Horiz;
+      }
+    }
+  }
+}
 
-			&:before {
-				content:'';
-				width: $trigram-width;
-				height: $trigram-width;
-				border-radius: $trigram-width;
-				position: absolute;
-				z-index: 1;
-			}
-		}
-
-		.positive {
-			background-color: $red;
-
-			&:before {
-				bottom: $trigram-width / 2;
-				background-color: $red;
-			}
-		}
-
-		.negative {
-			transform: rotate(180deg);
-			background-color: $blue;
-
-			&:before {
-				top: $trigram-width / 2;
-				background-color: $blue;
-			}
-		}
-	}
-
-	.trigram {
-		width: $trigram-width;
-		height: $trigram-height;
-		position: absolute;
-		display: flex;
-		flex-wrap: wrap;
-		align-content: space-between;
-		justify-content: space-between;
-
-		.stroke {
-			background-color: #000;
-			height: $trigram-stroke-weight;
-
-			&.full {
-				width: $trigram-width;
-			}
-
-			&.half {
-				width: ($trigram-width - $trigram-stroke-spacing) / 2;
-			}
-		}
-
-		&.geon {
-			@include trigram-position(top, left, bottom, true);
-		}
-
-		&.ri {
-			@include trigram-position(bottom, left, top);
-		}
-
-		&.gam {
-			@include trigram-position(top, right, bottom);
-		}
-
-		&.gon {
-			@include trigram-position(bottom, right, top, true);
-		}
-	}
+.temp {
+  display: none;
 }
