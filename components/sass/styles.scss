@@ -1,5 +1,49 @@
-@import 'reset';
-@import 'vars';
-@import 'functions';
-@import 'mixins';
-@import 'main';
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	overflow-y: hidden;
+}
+
+h2 {
+	font-size: 20px;
+}
+
+p {
+	font-size: 14px;
+}
+
+section {
+	width: 300vw;
+	height: 100vh;
+	background-color: navy;
+
+	&, .content {
+		display: flex;
+	}
+
+	.content {
+		width: 100vw;
+		height: 50vh;
+		align-items: flex-end;
+		background-color: crimson;
+
+		* {
+			position: relative;
+			background-color: white;
+			width: 25%;
+			padding: 15px;
+			border-radius: 10px 10px 0 0;
+			font-family: monospace;
+
+			&.lower-half {
+				align-self: flex-start;
+				top: 50vh;
+				border-radius: 0 0 10px 10px;
+			}
+		}
+	}
+}
