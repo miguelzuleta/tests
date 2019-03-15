@@ -8,6 +8,6 @@ $aspect-length: 3;
 $flag-aspect-ratio: $aspect-height / $aspect-length;
 $banner-cover-ratio: 85;
 
-$rotation-1: trigram-angle($flag-aspect-ratio) * 1deg;
+$rotation-1: atan-angle($flag-aspect-ratio) * 1deg;
 $rotation-2: 90 - $rotation-1;
 
