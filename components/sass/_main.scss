@@ -9,8 +9,8 @@ main {
 
 .flag {
 	@include specs((
-		width: 'flag-width',
-		height: 'flag-height'
+		width: 'width',
+		height: 'height'
 	));
 
 	background-color: #FFF;
@@ -21,9 +21,9 @@ main {
 
 	.taegeuk {
 		@include specs((
-			width: 'taegeuk',
-			height: 'taegeuk',
-			border-radius: 'taegeuk'
+			width: 'height-1_2',
+			height: 'height-1_2',
+			border-radius: 'height-1_2'
 		));
 
 		position: absolute;
@@ -33,17 +33,17 @@ main {
 
 		.side {
 			@include specs((
-				width: 'taegeuk',
-				height: 'trigram-width',
-				border-top-left-radius: 'taegeuk',
-				border-top-right-radius: 'taegeuk'
+				width: 'height-1_2',
+				height: 'height-1_4',
+				border-top-left-radius: 'height-1_2',
+				border-top-right-radius: 'height-1_2'
 			));
 
 			&:before {
 				@include specs((
-					width: 'trigram-width',
-					height: 'trigram-width',
-					border-radius: 'trigram-width'
+					width: 'height-1_4',
+					height: 'height-1_4',
+					border-radius: 'height-1_4'
 				));
 
 				content:'';
@@ -56,7 +56,7 @@ main {
 			background-color: $red;
 
 			&:before {
-				@include specs((bottom: 'taegeuk-offset'));
+				@include specs((bottom: 'height-1_8'));
 				background-color: $red;
 			}
 		}
@@ -66,7 +66,7 @@ main {
 			background-color: $blue;
 
 			&:before {
-				@include specs((top: 'taegeuk-offset'));
+				@include specs((top: 'height-1_8'));
 				background-color: $blue;
 			}
 		}
@@ -74,8 +74,8 @@ main {
 
 	.trigram {
 		@include specs((
-			width: 'trigram-width',
-			height: 'trigram-height'
+			width: 'height-1_4',
+			height: 'height-1_6'
 		));
 
 		position: absolute;
@@ -85,15 +85,15 @@ main {
 		justify-content: space-between;
 
 		.stroke {
-			@include specs((height: 'trigram-stroke-weight'));
+			@include specs((height: 'height-1_24'));
 			background-color: #000;
 
 			&.full {
-				@include specs((width: 'trigram-width'));
+				@include specs((width: 'height-1_4'));
 			}
 
 			&.half {
-				@include specs((width: 'trigram-half-stroke-spacing'));
+				@include specs((width: 'stroke-spacing'));
 			}
 		}
 

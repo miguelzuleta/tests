@@ -2,17 +2,12 @@ $red: #CD2E3A;
 $blue: #0047A0;
 
 $PI: 3.1415;
-$flag-aspect-ratio: 2 / 3;
+
+$aspect-height: 2;
+$aspect-length: 3;
+$flag-aspect-ratio: $aspect-height / $aspect-length;
 $banner-cover-ratio: 85;
+
 $rotation-1: trigram-angle($flag-aspect-ratio) * 1deg;
 $rotation-2: 90 - $rotation-1;
 
-// $flag-width: 80vw;
-// $flag-height: $flag-width * $flag-aspect-ratio;
-
-// $elements-size-base: $flag-height / 2;
-// $taegeuk: $elements-size-base;
-// $trigram-width: $elements-size-base / 2;
-// $trigram-height: $elements-size-base / 3;
-// $trigram-stroke-weight: $elements-size-base / 12;
-// $trigram-stroke-spacing: $elements-size-base / 24;

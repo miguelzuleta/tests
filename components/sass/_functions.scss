@@ -20,25 +20,25 @@
 @function flag-specs($width, $height) {
 	$flag-width: $width;
 	$flag-height: $height;
-	$elements-size-base: $flag-height / 2;
-	$taegeuk: $elements-size-base;
-	$taegeuk-offset: $taegeuk / 4;
-	$trigram-width: $elements-size-base / 2;
-	$trigram-height: $elements-size-base / 3;
-	$trigram-stroke-weight: $elements-size-base / 12;
-	$trigram-stroke-spacing: $elements-size-base / 24;
-	$trigram-half-stroke-spacing: ($trigram-width - $trigram-stroke-spacing) / 2;
+
+	$height-1_2: $flag-height / 2;
+	$height-1_4: $flag-height / 4;
+	$height-1_6: $flag-height / 6;
+	$height-1_8: $flag-height / 8;
+	$height-1_24: $flag-height / 24;
+	$height-1_48: $flag-height / 48;
+
+	$stroke-spacing: ($height-1_4 - $height-1_48) / 2;
 
 	@return (
-		'flag-width': $flag-width,
-		'flag-height': $flag-height,
-		'elements-size-base': $elements-size-base,
-		'taegeuk': $taegeuk,
-		'taegeuk-offset': $taegeuk-offset,
-		'trigram-width': $trigram-width,
-		'trigram-height': $trigram-height,
-		'trigram-stroke-weight': $trigram-stroke-weight,
-		'trigram-stroke-spacing': $trigram-stroke-spacing,
-		'trigram-half-stroke-spacing': $trigram-half-stroke-spacing
+		'width': $flag-width,
+		'height': $flag-height,
+		'height-1_2': $height-1_2,
+		'height-1_4': $height-1_4,
+		'height-1_6': $height-1_6,
+		'height-1_8': $height-1_8,
+		'height-1_24': $height-1_24,
+		'height-1_48': $height-1_48,
+		'stroke-spacing': $stroke-spacing
 	)
 }

@@ -25,7 +25,7 @@
 
 	@include css-props($props, $width, $height);
 
-	@media screen and (min-aspect-ratio: 3 / 2) {
+	@media screen and (min-aspect-ratio: #{$aspect-length} / #{$aspect-height}) {
 		$height: $banner-cover-ratio * 1vh;
 		$width: $height / $flag-aspect-ratio;
 
