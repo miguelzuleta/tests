@@ -8,8 +8,11 @@ main {
 }
 
 .flag {
-	width: $flag-width;
-	height: $flag-height;
+	@include specs((
+		width: 'flag-width',
+		height: 'flag-height'
+	));
+
 	background-color: #FFF;
 	position: relative;
 	top: 50%;
@@ -17,24 +20,33 @@ main {
 	transform: translate(-50%, -50%);
 
 	.taegeuk {
-		width: $taegeuk;
-		height: $taegeuk;
+		@include specs((
+			width: 'taegeuk',
+			height: 'taegeuk',
+			border-radius: 'taegeuk'
+		));
+
 		position: absolute;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%) rotate(#{$rotation-1});
-		border-radius: $taegeuk;
 
 		.side {
-			width: $taegeuk;
-			height: $trigram-width;
-			border-radius: $taegeuk $taegeuk 0 0;
+			@include specs((
+				width: 'taegeuk',
+				height: 'trigram-width',
+				border-top-left-radius: 'taegeuk',
+				border-top-right-radius: 'taegeuk'
+			));
 
 			&:before {
+				@include specs((
+					width: 'trigram-width',
+					height: 'trigram-width',
+					border-radius: 'trigram-width'
+				));
+
 				content:'';
-				width: $trigram-width;
-				height: $trigram-width;
-				border-radius: $trigram-width;
 				position: absolute;
 				z-index: 1;
 			}
@@ -44,7 +56,7 @@ main {
 			background-color: $red;
 
 			&:before {
-				bottom: $trigram-width / 2;
+				@include specs((bottom: 'taegeuk-offset'));
 				background-color: $red;
 			}
 		}
@@ -54,15 +66,18 @@ main {
 			background-color: $blue;
 
 			&:before {
-				top: $trigram-width / 2;
+				@include specs((top: 'taegeuk-offset'));
 				background-color: $blue;
 			}
 		}
 	}
 
 	.trigram {
-		width: $trigram-width;
-		height: $trigram-height;
+		@include specs((
+			width: 'trigram-width',
+			height: 'trigram-height'
+		));
+
 		position: absolute;
 		display: flex;
 		flex-wrap: wrap;
@@ -70,15 +85,15 @@ main {
 		justify-content: space-between;
 
 		.stroke {
+			@include specs((height: 'trigram-stroke-weight'));
 			background-color: #000;
-			height: $trigram-stroke-weight;
 
 			&.full {
-				width: $trigram-width;
+				@include specs((width: 'trigram-width'));
 			}
 
 			&.half {
-				width: ($trigram-width - $trigram-stroke-spacing) / 2;
+				@include specs((width: 'trigram-half-stroke-spacing'));
 			}
 		}
 

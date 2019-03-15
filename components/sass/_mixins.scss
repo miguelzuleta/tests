@@ -11,3 +11,24 @@
 	transform-origin: $trans-origin center;
 	transform: rotate(#{$rotation-2 * $multiplier});
 }
+
+@mixin css-props($props, $width, $height) {
+	@each $prop, $value in $props {
+		$flag-spec: map-get(flag-specs($width, $height), $value);
+		#{$prop}: #{$flag-spec};
+	}
+}
+
+@mixin specs($props) {
+	$width: $banner-cover-ratio * 1vw;
+	$height: $width * $flag-aspect-ratio;
+
+	@include css-props($props, $width, $height);
+
+	@media screen and (min-aspect-ratio: 3 / 2) {
+		$height: $banner-cover-ratio * 1vh;
+		$width: $height / $flag-aspect-ratio;
+
+		@include css-props($props, $width, $height);
+	}
+}
