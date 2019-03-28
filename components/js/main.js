@@ -1,2 +1,2 @@
-import s1 from './script1.js'
-import s2 from './script2.js'
+// import test01 from './01-sock-merchant.js'
+import test02 from './02-counting-valleys.js'
