@@ -43,46 +43,10 @@ let counter = 0;
 let sortAr = []
 
 function countingValleys(n, s) {
-	// let nVal = n;
-		console.log(counter);
-
-	if (countInit < 1) {
-		sortAr = s.split('').sort();
-		countInit++
-	} else {
-		sortAr = s;
-	}
-
-	console.log('current', sortAr)
-
-	let firstOfSplit = Math.ceil(n / 2);
-	let last = n - 1;
-
-	counter++
-
-	if (sortAr.length === 1) {
-		console.log('exit', counter)
-		console.log('exit', sortAr.length)
-		return
-	}
-
-    if (sortAr[0] !== sortAr[firstOfSplit]) {
-    	let spliceFirst = sortAr.splice(0, firstOfSplit);
-    	console.log('spliceFirst', spliceFirst)
-    	// counter++
-    	countingValleys(spliceFirst.length, spliceFirst);
-    } else if (sortAr[last] !== sortAr[firstOfSplit]) {
-    	let spliceLast = sortAr.splice(firstOfSplit, last);
-    	console.log('spliceLast', spliceLast)
-    	// counter++
-    	countingValleys(spliceLast.length, spliceLast);
-    } else {
-    	console.log('exit', counter);
-    	console.log('exit', sortAr.length);
-    	return
-    }
-
-    // console.log('end')
+	
+	let getDif = s.split('').sort().map(elem => {
+		
+	})
 
 }
 
