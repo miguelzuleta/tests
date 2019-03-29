@@ -37,17 +37,25 @@ Sample Output
 
 */
 
-let ar = 'UDDUDUUUUUUUU';
-let countInit = 0;
-let counter = 0;
-let sortAr = []
+let ar = 'UDDUDUDDUU'.split('');
+let counter = 1;
 
 function countingValleys(n, s) {
-	
-	let getDif = s.split('').sort().map(elem => {
-		
-	})
+	let sortAr = s.sort()
+
+    console.log(sortAr)
+    for(counter; counter < n; counter++) {
+        if (counter - 1 === n) {
+            break;
+        }
+
+        if (sortAr[counter - 1] !== sortAr[counter]) {
+            break;
+        }
+    }
+
+    return Math.round((n - counter) / counter);
 
 }
 
-countingValleys(ar.length, ar);
+console.log(countingValleys(ar.length, ar));
