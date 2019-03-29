@@ -36,26 +36,59 @@ Sample Output
 
 
 */
-
-let ar = 'UDDUDUDDUU'.split('');
-let counter = 1;
+// UDDUDUDDUU
+let ar = 'UUUDDDDUUDDUUUDDDDUUUD'.split('');
+// let ar = 'U D D U D U D D U U'.split(' ');
+// let ar = 'U D D D U D U U'.split(' ');
+let counter = 0;
+let valleys = 0
+let inValley = false;
 
 function countingValleys(n, s) {
-	let sortAr = s.sort()
+	s.forEach(elem => {
 
-    console.log(sortAr)
-    for(counter; counter < n; counter++) {
-        if (counter - 1 === n) {
-            break;
-        }
+		if (elem === "U") {
+			counter++;
+		} else if (elem === "D") {
+			counter--;
+		}
 
-        if (sortAr[counter - 1] !== sortAr[counter]) {
-            break;
-        }
-    }
+		if (counter < 0 && !inValley) {
+			inValley = true;
+		}
 
-    return Math.round((n - counter) / counter);
+		if (counter >= 0 && inValley) {
+			inValley = false;
+			valleys++;
+		}
+		console.log(elem, counter, inValley, valleys)
+	})
 
+	return valleys;
 }
 
 console.log(countingValleys(ar.length, ar));
+
+/*
+UUUDDDDUUDDUUUDDDDUUUD
+   /\
+  /  \        /\
+_/    \  /\  /  \    /\_
+       \/  \/    \  /
+                  \/
+
+_/\
+   \    /
+    \/\/
+
+
+_/\        _
+   \/\/\  /
+        \/
+
+
+
+_/\  /\_
+   \/
+
+*/
