@@ -6,6 +6,8 @@ let num = 547602;
 // let num = 10;
 let timerInit = 0;
 
+// node components/js/04-repeated-string.js
+
 function repeatedString(s, n) {
 	let strLength = s.length;
 	let matchRegex = new RegExp(s.charAt(0), 'g');
