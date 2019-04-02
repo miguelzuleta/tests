@@ -3,4 +3,5 @@
 // import test03 from './03-jumping-clouds.js'
 // import test04 from './04-repeated-string.js'
 
-import test05 from './05-array-ds.js'
+// import test05 from './05-array-ds.js'
+import test06 from './06-array-left-rotation.js'
