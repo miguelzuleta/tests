@@ -4,4 +4,5 @@
 // import test04 from './04-repeated-string.js'
 
 // import test05 from './05-array-ds.js'
-import test06 from './06-array-left-rotation.js'
+// import test06 from './06-array-left-rotation.js'
+import test07 from './07-new-year-chaos.js'
