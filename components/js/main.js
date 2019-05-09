@@ -1,2 +1,4 @@
-import s1 from './script1.js'
-import s2 from './script2.js'
+import NotAnArray from './01-not-an-array.js'
+
+let o = new NotAnArray()
+o.push()
