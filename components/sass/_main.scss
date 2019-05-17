@@ -1,14 +1,19 @@
-body {
-	background-color: $color1;
+div, button {
+	margin: 20px;
 }
 
-main{
-	@include center();
-	padding: 20px;
-	background-color: $color2;
-	color: darken($color2);
+$sprite1: (
+	frames: 5,
+	duration: 10s,
+	image: 'sprite-thing.png'
+);
 
-	h1 {
-		font-weight: bold;
-	}
+.img1 {
+	@include anim($sprite1);
+
+	// @at-root {
+	// 	.reverse & {
+	// 		@include anim($sprite1, 'backwards');
+	// 	}
+	// }
 }

@@ -1,2 +1,10 @@
-import s1 from './script1.js'
-import s2 from './script2.js'
+let bod = document.querySelector('body');
+let btn = document.querySelector('button');
+let dir = ['forwards', 'backwards'];
+let count = 0;
+
+btn.addEventListener('click', () => {
+	bod.classList.toggle('reverse');
+	btn.innerHTML = `animate ${dir[count % 2]}`;
+	count ++;
+})

@@ -1,6 +1,93 @@
-@mixin center(){
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+@mixin anim-bg($animation-name, $offset-before, $offset-after) {
+	background-position: $offset-before 0;
+
+	@at-root {
+		@keyframes #{$animation-name} {
+			to {
+				background-position: $offset-after 0;
+			}
+		}
+	}
+}
+
+@mixin keyframe-test($name) {
+		@at-root {
+			@keyframes #{$name} {
+				@content;
+			}
+		}
+}
+
+// https://raw.githubusercontent.com/miguelzuleta/r/master/sprite-thing.png 
+
+@mixin anim($map, $direction: 'forwards') {
+	$columns: 5;
+	$rows: 5;
+
+	$spriteWidth: 800px;
+	$spriteHeight: 400px;
+	// width and height with width sasskit function
+	$width: $spriteWidth / $rows;
+	$height: $spriteHeight / $columns;
+
+	// @include keyframe-test('test-anim') {
+	// 	@for $i from 0 through $rows - 1 {
+	// 		$keyframe: #{($i * 1%) * $rows};
+
+	// 		#{$keyframe} {
+	// 			background-position: ($i * $width * -1) 0;
+	// 		}
+	// 	}
+	// }
+
+	$frames: map-get($map, 'frames');
+	$duration: map-get($map, 'duration');
+	$image: map-get($map, 'image');
+	$offset: ($frames * $width) * -1;
+	$anim-name: 'anim-#{random(9999999)}';
+	$anim-val: ();
+	$loop: 5;
+
+	@for $i from 1 through $loop {
+		$anim-delay: ($duration / $rows) * ($i - 1) + 0.01;
+		$random-anim-name: '#{$anim-name}-#{$i}';
+		$section-duration: $duration / $loop;
+
+		@if $i == $loop {
+			$frames: $frames - 1;
+		}
+
+		$anim-details: '#{$section-duration} #{$anim-delay} steps(#{$frames}) forwards';
+		$offset-height: ($height * -1) * ($i - 1);
+
+		@if $i != $loop {
+			$anim-details: '#{$anim-details},';
+		}
+
+		$anim-val: append($anim-val, #{$random-anim-name $anim-details});
+		// $anim-val: #{$anim-val $random-anim-name $duration steps($frames) forwards};
+
+		@include keyframe-test($random-anim-name) {
+			from {
+				background-position: 0 0;
+			}
+
+			to {
+				background-position: $offset $offset-height;
+			}
+		}
+	}
+
+	width: $width;
+	height: $height;
+	background-image: url($image);
+	background-repeat: no-repeat;
+	// animation: #{$anim-name} $duration steps($frames) forwards;
+	animation: #{$anim-val};
+
+	// @if ($direction == 'forwards') {
+	// 	@include anim-bg($anim-name, 0, $offset);
+	// } @else if ($direction == 'backwards') {
+	// 	@include anim-bg($anim-name, $offset, 0);
+	// }
 }
