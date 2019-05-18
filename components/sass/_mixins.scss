@@ -43,15 +43,18 @@
 	$frames: map-get($map, 'frames');
 	$duration: map-get($map, 'duration');
 	$image: map-get($map, 'image');
-	$offset: ($frames * $width) * -1;
+	$offset: ($frames * $width) * -1 + $width;
 	$anim-name: 'anim-#{random(9999999)}';
 	$anim-val: ();
-	$loop: 5;
+	$loop: 3;
+	$delayer: 0;
 
 	@for $i from 1 through $loop {
-		$anim-delay: ($duration / $rows) * ($i - 1) + 0.01;
+		$anim-delay: ($duration / $loop) * ($i - 1) + $delayer;
 		$random-anim-name: '#{$anim-name}-#{$i}';
 		$section-duration: $duration / $loop;
+
+		$delayer: $delayer + $section-duration;
 
 		@if $i == $loop {
 			$frames: $frames - 1;
@@ -66,10 +69,28 @@
 
 		$anim-val: append($anim-val, #{$random-anim-name $anim-details});
 		// $anim-val: #{$anim-val $random-anim-name $duration steps($frames) forwards};
+		
+
+		/*
+			first row start 
+			background-position: 0px 0px;
+
+			first row end 
+			background-position: -640px 0px;
+
+			second row start
+			background-position: 0 -80px;
+
+			second row end
+			background-position: -640px -80px;
+
+		*/
+
+		@warn $offset $offset-height;
 
 		@include keyframe-test($random-anim-name) {
 			from {
-				background-position: 0 0;
+				background-position: 0 $offset-height;
 			}
 
 			to {

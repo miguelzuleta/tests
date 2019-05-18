@@ -4,12 +4,13 @@ div, button {
 
 $sprite1: (
 	frames: 5,
-	duration: 10s,
+	duration: 0.5s,
 	image: 'sprite-thing.png'
 );
 
 .img1 {
 	@include anim($sprite1);
+	background-color: red;
 
 	// @at-root {
 	// 	.reverse & {
