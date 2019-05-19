@@ -1,114 +1,92 @@
-@mixin anim-bg($animation-name, $offset-before, $offset-after) {
-	background-position: $offset-before 0;
+$img: 'https://raw.githubusercontent.com/miguelzuleta/r/master/sprite-thing.png';
 
+@mixin keyframe-test($name) {
 	@at-root {
-		@keyframes #{$animation-name} {
-			to {
-				background-position: $offset-after 0;
-			}
+		@keyframes #{$name} {
+			@content;
 		}
 	}
 }
 
-@mixin keyframe-test($name) {
-		@at-root {
-			@keyframes #{$name} {
-				@content;
-			}
-		}
-}
-
-// https://raw.githubusercontent.com/miguelzuleta/r/master/sprite-thing.png 
-
-@mixin anim($map, $direction: 'forwards') {
+@mixin anim($map, $direction: null) {
 	$columns: 5;
 	$rows: 5;
 
 	$spriteWidth: 800px;
 	$spriteHeight: 400px;
-	// width and height with width sasskit function
+	
+
 	$width: $spriteWidth / $rows;
 	$height: $spriteHeight / $columns;
-
-	// @include keyframe-test('test-anim') {
-	// 	@for $i from 0 through $rows - 1 {
-	// 		$keyframe: #{($i * 1%) * $rows};
-
-	// 		#{$keyframe} {
-	// 			background-position: ($i * $width * -1) 0;
-	// 		}
-	// 	}
-	// }
-
-	$frames: map-get($map, 'frames');
-	$duration: map-get($map, 'duration');
+	
 	$image: map-get($map, 'image');
-	$offset: ($frames * $width) * -1 + $width;
-	$anim-name: 'anim-#{random(9999999)}';
-	$anim-val: ();
-	$loop: 3;
-	$delayer: 0;
-
-	@for $i from 1 through $loop {
-		$anim-delay: ($duration / $loop) * ($i - 1) + $delayer;
-		$random-anim-name: '#{$anim-name}-#{$i}';
-		$section-duration: $duration / $loop;
-
-		$delayer: $delayer + $section-duration;
-
-		@if $i == $loop {
-			$frames: $frames - 1;
-		}
-
-		$anim-details: '#{$section-duration} #{$anim-delay} steps(#{$frames}) forwards';
-		$offset-height: ($height * -1) * ($i - 1);
-
-		@if $i != $loop {
-			$anim-details: '#{$anim-details},';
-		}
-
-		$anim-val: append($anim-val, #{$random-anim-name $anim-details});
-		// $anim-val: #{$anim-val $random-anim-name $duration steps($frames) forwards};
-		
-
-		/*
-			first row start 
-			background-position: 0px 0px;
-
-			first row end 
-			background-position: -640px 0px;
-
-			second row start
-			background-position: 0 -80px;
-
-			second row end
-			background-position: -640px -80px;
-
-		*/
-
-		@warn $offset $offset-height;
-
-		@include keyframe-test($random-anim-name) {
-			from {
-				background-position: 0 $offset-height;
-			}
-
-			to {
-				background-position: $offset $offset-height;
-			}
-		}
-	}
 
 	width: $width;
 	height: $height;
 	background-image: url($image);
 	background-repeat: no-repeat;
-	// animation: #{$anim-name} $duration steps($frames) forwards;
-	animation: #{$anim-val};
+	
+	$duration: map-get($map, 'duration');
+	
+	$random: 'anim-#{random(9999999)}';
+	
+	animation: #{$random} $duration steps(1) forwards;
 
-	// @if ($direction == 'forwards') {
-	// 	@include anim-bg($anim-name, 0, $offset);
-	// } @else if ($direction == 'backwards') {
-	// 	@include anim-bg($anim-name, $offset, 0);
-	// }
+	@if ($direction == 'reverse') {
+		animation-direction: reverse;
+	}
+	
+	@include keyframe-test($random) {
+		10% {
+			background-position: -160px 0;
+		}
+		
+		20% {
+			background-position: -320px 0;
+		}
+		
+		30% {
+			background-position: -480px 0;
+		}
+		
+		40% {
+			background-position: -640px 0;
+		}
+		
+		50% {
+			background-position: 0 -80px;
+		}
+		
+		60% {
+			background-position: -160px -80px;
+		}
+		
+		70% {
+			background-position: -320px -80px;
+		}
+		
+		80% {
+			background-position: -480px -80px;
+		}
+		
+		90% {
+			background-position: -640px -80px;
+		}
+		
+		100% {
+			background-position: -640px -80px;
+		}
+		
+	}
+	
+	/* 
+	
+	bottom to top
+	    background-position: 0 -320px;
+    /* background-position: 0 -240px; */
+    /* background-position: 0 -160px; */
+    /* background-position: 0 0; */
+	
+	
+	
 }
