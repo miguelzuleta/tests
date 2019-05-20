@@ -35,75 +35,79 @@ $img: 'sprite-thing2.png';
 		animation-direction: reverse;
 	}
 
-	@include keyframe-test('test-#{$random}') {
-		// @for $i from 1 through ($columns * $rows) {
-		// 	$keyframe: ($i) * $columns * 1%;
-
-		// 	#{$keyframe} {
-		// 		opacity: 1;
-		// 	}
-		// }
-
-		// @for $i from 1 through $columns {
-		// 	@for $j from 1 through $rows {
-		// 		$keyframe: ($i * $j) * $columns * 1%;
-
-		// 		#{$keyframe} {
-		// 			background-position: ($width * $j * -1) ($height - $height * $i);
-		// 		}
-		// 	}
-		// }
-	}
-
-	background-position: 0 0;
-	
 	@include keyframe-test($random) {
-		0% {
-			background-position: 0 0;
-		}
+		$counter: -1;
 
-		10% {
-			background-position: -160px 0;
-		}
-		
-		20% {
-			background-position: -320px 0;
-		}
-		
-		30% {
-			background-position: -480px 0;
-		}
-		
-		40% {
-			background-position: -640px 0;
-		}
+		@for $i from 1 through $rows {
+			@for $j from 1 through $columns {
+				$counter: $counter + 1;
 
-		
-		50% {
-			background-position: 0 -80px;
+				$keyframe: $counter / ($rows * $columns) * 100%;
+				$position: ($width + $width * $j * -1) ($height - $height * $i);
+
+				#{$keyframe} {
+					background-position: $position;
+				}
+
+				@if ($i == $rows) and ($j == $columns) {
+					100% {
+						background-position: $position;
+					}
+				}
+			}
 		}
-		
-		60% {
-			background-position: -160px -80px;
-		}
-		
-		70% {
-			background-position: -320px -80px;
-		}
-		
-		80% {
-			background-position: -480px -80px;
-		}
-		
-		90% {
-			background-position: -640px -80px;
-		}
-		
-		100% {
-			background-position: -640px -80px;
-		}
-		
+		$counter: $counter + 1;
 	}
+
+	// background-position: 0 0;
+	
+	// @include keyframe-test($random) {
+	// 	0% {
+	// 		background-position: 0 0;
+	// 	}
+
+	// 	10% {
+	// 		background-position: -160px 0;
+	// 	}
+		
+	// 	20% {
+	// 		background-position: -320px 0;
+	// 	}
+		
+	// 	30% {
+	// 		background-position: -480px 0;
+	// 	}
+		
+	// 	40% {
+	// 		background-position: -640px 0;
+	// 	}
+
+		
+	// 	50% {
+	// 		background-position: 0 -80px;
+	// 	}
+		
+	// 	60% {
+	// 		background-position: -160px -80px;
+	// 	}
+		
+	// 	70% {
+	// 		background-position: -320px -80px;
+	// 	}
+		
+	// 	80% {
+	// 		background-position: -480px -80px;
+	// 	}
+		
+	// 	90% {
+	// 		background-position: -640px -80px;
+	// 	}
+		
+	// 	100% {
+	// 		background-position: -640px -80px;
+	// 	}
+		
+	// }
 	
 	/* 
 	
