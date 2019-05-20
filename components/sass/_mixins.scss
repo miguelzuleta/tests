@@ -1,4 +1,4 @@
-$img: 'https://raw.githubusercontent.com/miguelzuleta/r/master/sprite-thing.png';
+$img: 'sprite-thing2.png';
 
 @mixin keyframe-test($name) {
 	@at-root {
@@ -10,14 +10,13 @@ $img: 'https://raw.githubusercontent.com/miguelzuleta/r/master/sprite-thing.png'
 
 @mixin anim($map, $direction: null) {
 	$columns: 5;
-	$rows: 5;
+	$rows: 4;
 
 	$spriteWidth: 800px;
-	$spriteHeight: 400px;
+	$spriteHeight: 320px;
 	
-
-	$width: $spriteWidth / $rows;
-	$height: $spriteHeight / $columns;
+	$width: $spriteWidth / $columns;
+	$height: $spriteHeight / $rows;
 	
 	$image: map-get($map, 'image');
 
@@ -35,8 +34,34 @@ $img: 'https://raw.githubusercontent.com/miguelzuleta/r/master/sprite-thing.png'
 	@if ($direction == 'reverse') {
 		animation-direction: reverse;
 	}
+
+	@include keyframe-test('test-#{$random}') {
+		// @for $i from 1 through ($columns * $rows) {
+		// 	$keyframe: ($i) * $columns * 1%;
+
+		// 	#{$keyframe} {
+		// 		opacity: 1;
+		// 	}
+		// }
+
+		// @for $i from 1 through $columns {
+		// 	@for $j from 1 through $rows {
+		// 		$keyframe: ($i * $j) * $columns * 1%;
+
+		// 		#{$keyframe} {
+		// 			background-position: ($width * $j * -1) ($height - $height * $i);
+		// 		}
+		// 	}
+		// }
+	}
+
+	background-position: 0 0;
 	
 	@include keyframe-test($random) {
+		0% {
+			background-position: 0 0;
+		}
+
 		10% {
 			background-position: -160px 0;
 		}
@@ -52,6 +77,7 @@ $img: 'https://raw.githubusercontent.com/miguelzuleta/r/master/sprite-thing.png'
 		40% {
 			background-position: -640px 0;
 		}
+
 		
 		50% {
 			background-position: 0 -80px;
