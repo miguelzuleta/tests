@@ -68,11 +68,11 @@ $img: 'sprite-thing2.png';
 
 				@if ($from == 'bottom') {
 					@if ($through == 'columns') {
-						$position: ($width + $width * $i * -1) ($height + $height * $j * -1);
+						$position: ($width + $width * $i * -1) (($spriteHeight - ($height * $j)) * -1);
 					}
 
 					@if ($through == 'rows') {
-						$position: ($width + $width * $i * -1) ((($spriteHeight - $height) * $i) * -1);
+						$position: ($width + $width * $j * -1) (($spriteHeight - ($height * $i)) * -1);
 					}
 				}
 

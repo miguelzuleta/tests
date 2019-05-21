@@ -7,39 +7,39 @@ section {
 	display: flex;
 }
 
-// $sprite1: (
-// 	from: 'top',
-// 	through: 'rows',
-// 	rows: 4,
-// 	columns: 5,
-// 	duration: 2s,
-// 	image: $img
-// );
+$sprite1: (
+	from: 'top',
+	through: 'rows',
+	rows: 4,
+	columns: 5,
+	duration: 2s,
+	image: $img
+);
 
-// .img1 {
-// 	@include anim($sprite1);
+.img1 {
+	@include anim($sprite1);
 
-// 	@at-root .reverse & {
-// 		@include anim($sprite1, 'reverse');
-// 	}
-// }
+	@at-root .reverse & {
+		@include anim($sprite1, 'reverse');
+	}
+}
 
-// $sprite2: (
-// 	from: 'top',
-// 	through: 'columns',
-// 	rows: 4,
-// 	columns: 5,
-// 	duration: 2s,
-// 	image: $img
-// );
+$sprite2: (
+	from: 'top',
+	through: 'columns',
+	rows: 4,
+	columns: 5,
+	duration: 2s,
+	image: $img
+);
 
-// .img2 {
-// 	@include anim($sprite2);
+.img2 {
+	@include anim($sprite2);
 
-// 	@at-root .reverse & {
-// 		@include anim($sprite2, 'reverse');
-// 	}
-// }
+	@at-root .reverse & {
+		@include anim($sprite2, 'reverse');
+	}
+}
 
 $sprite3: (
 	from: 'bottom',
@@ -56,4 +56,21 @@ $sprite3: (
 	@at-root .reverse & {
 		@include anim($sprite3, 'reverse');
 	}
+}
+
+$sprite4: (
+    from: 'bottom',
+    through: 'columns',
+    rows: 4,
+    columns: 5,
+    duration: 2s,
+    image: $img
+);
+
+.img4 {
+    @include anim($sprite4);
+
+    @at-root .reverse & {
+        @include anim($sprite4, 'reverse');
+    }
 }
