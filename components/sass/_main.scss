@@ -2,36 +2,58 @@ div, button {
 	margin: 20px;
 }
 
-$sprite1: (
-	from: 'top',
+section {
+	width: 100vw;
+	display: flex;
+}
+
+// $sprite1: (
+// 	from: 'top',
+// 	through: 'rows',
+// 	rows: 4,
+// 	columns: 5,
+// 	duration: 2s,
+// 	image: $img
+// );
+
+// .img1 {
+// 	@include anim($sprite1);
+
+// 	@at-root .reverse & {
+// 		@include anim($sprite1, 'reverse');
+// 	}
+// }
+
+// $sprite2: (
+// 	from: 'top',
+// 	through: 'columns',
+// 	rows: 4,
+// 	columns: 5,
+// 	duration: 2s,
+// 	image: $img
+// );
+
+// .img2 {
+// 	@include anim($sprite2);
+
+// 	@at-root .reverse & {
+// 		@include anim($sprite2, 'reverse');
+// 	}
+// }
+
+$sprite3: (
+	from: 'bottom',
 	through: 'rows',
 	rows: 4,
 	columns: 5,
-	duration: 20s,
+	duration: 2s,
 	image: $img
 );
 
-.img1 {
-	@include anim($sprite1);
+.img3 {
+	@include anim($sprite3);
 
 	@at-root .reverse & {
-		@include anim($sprite1, 'reverse');
-	}
-}
-
-$sprite2: (
-	from: 'top',
-	through: 'columns',
-	rows: 4,
-	columns: 5,
-	duration: 20s,
-	image: $img
-);
-
-.img2 {
-	@include anim($sprite2);
-
-	@at-root .reverse & {
-		@include anim($sprite2, 'reverse');
+		@include anim($sprite3, 'reverse');
 	}
 }

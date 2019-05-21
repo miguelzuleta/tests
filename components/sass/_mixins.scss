@@ -42,6 +42,10 @@ $img: 'sprite-thing2.png';
 		$axis2: $columns;
 	}
 
+	@if ($from == 'bottom') {
+		background-position: 0 ($spriteHeight - $height) * -1;
+	}
+
 	@include keyframe-test($random) {
 		$counter: -1;
 		$position: 0 0;
@@ -59,6 +63,16 @@ $img: 'sprite-thing2.png';
 
 					@if ($through == 'rows') {
 						$position: ($width + $width * $j * -1) ($height - $height * $i);
+					}
+				}
+
+				@if ($from == 'bottom') {
+					@if ($through == 'columns') {
+						$position: ($width + $width * $i * -1) ($height + $height * $j * -1);
+					}
+
+					@if ($through == 'rows') {
+						$position: ($width + $width * $i * -1) ((($spriteHeight - $height) * $i) * -1);
 					}
 				}
 
