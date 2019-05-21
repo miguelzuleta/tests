@@ -15,6 +15,7 @@ $img: 'sprite-thing2.png';
 	$through:  map-get($map, 'through');
 	$duration: map-get($map, 'duration');
 	$image: map-get($map, 'image');
+	$frames: map-get($map, 'frames');
 
 	$axis1: $columns;
 	$axis2: $rows;
@@ -49,35 +50,44 @@ $img: 'sprite-thing2.png';
 	@include keyframe-test($random) {
 		$counter: -1;
 		$position: 0 0;
+		$custom-frames: false;
+		$total-frames: ($axis1 * $axis2);
+
+		@if ($frames != null and $frames < ($axis1 * $axis2)) {
+			$total-frames: $frames;
+			$custom-frames: true;
+		}
 
 		@for $i from 1 through $axis1 {
 			@for $j from 1 through $axis2 {
 				$counter: $counter + 1;
 
-				$keyframe: $counter / ($axis1 * $axis2) * 100%;
+				$keyframe: $counter / $total-frames * 100%;
 
-				@if ($from == 'top') {
-					@if ($through == 'columns') {
-						$position: ($width + $width * $i * -1) ($height + $height * $j * -1);
+				@if (($custom-frames == true and $counter < $frames) or ($custom-frames == false)) {
+					@if ($from == 'top') {
+						@if ($through == 'columns') {
+							$position: ($width + $width * $i * -1) ($height + $height * $j * -1);
+						}
+
+						@if ($through == 'rows') {
+							$position: ($width + $width * $j * -1) ($height - $height * $i);
+						}
 					}
 
-					@if ($through == 'rows') {
-						$position: ($width + $width * $j * -1) ($height - $height * $i);
-					}
-				}
+					@if ($from == 'bottom') {
+						@if ($through == 'columns') {
+							$position: ($width + $width * $i * -1) (($spriteHeight - ($height * $j)) * -1);
+						}
 
-				@if ($from == 'bottom') {
-					@if ($through == 'columns') {
-						$position: ($width + $width * $i * -1) (($spriteHeight - ($height * $j)) * -1);
+						@if ($through == 'rows') {
+							$position: ($width + $width * $j * -1) (($spriteHeight - ($height * $i)) * -1);
+						}
 					}
 
-					@if ($through == 'rows') {
-						$position: ($width + $width * $j * -1) (($spriteHeight - ($height * $i)) * -1);
+					#{$keyframe} {
+						background-position: $position;
 					}
-				}
-
-				#{$keyframe} {
-					background-position: $position;
 				}
 			}
 

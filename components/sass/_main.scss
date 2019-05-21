@@ -1,10 +1,11 @@
 div, button {
-	margin: 20px;
+	margin: 35px;
 }
 
 section {
 	width: 100vw;
 	display: flex;
+    flex-wrap: wrap;
 }
 
 $sprite1: (
@@ -12,6 +13,7 @@ $sprite1: (
 	through: 'rows',
 	rows: 4,
 	columns: 5,
+    frames: 5,
 	duration: 2s,
 	image: $img
 );
@@ -29,6 +31,7 @@ $sprite2: (
 	through: 'columns',
 	rows: 4,
 	columns: 5,
+    frames: 17,
 	duration: 2s,
 	image: $img
 );
@@ -46,6 +49,7 @@ $sprite3: (
 	through: 'rows',
 	rows: 4,
 	columns: 5,
+    frames: 17,
 	duration: 2s,
 	image: $img
 );
@@ -63,6 +67,7 @@ $sprite4: (
     through: 'columns',
     rows: 4,
     columns: 5,
+    frames: 17,
     duration: 2s,
     image: $img
 );
