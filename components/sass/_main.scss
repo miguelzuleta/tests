@@ -3,14 +3,35 @@ div, button {
 }
 
 $sprite1: (
-	duration: 1.5s,
+	from: 'top',
+	through: 'rows',
+	rows: 4,
+	columns: 5,
+	duration: 20s,
 	image: $img
 );
 
-.img1, .img2 {
+.img1 {
 	@include anim($sprite1);
 
 	@at-root .reverse & {
 		@include anim($sprite1, 'reverse');
+	}
+}
+
+$sprite2: (
+	from: 'top',
+	through: 'columns',
+	rows: 4,
+	columns: 5,
+	duration: 20s,
+	image: $img
+);
+
+.img2 {
+	@include anim($sprite2);
+
+	@at-root .reverse & {
+		@include anim($sprite2, 'reverse');
 	}
 }

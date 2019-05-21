@@ -9,114 +9,70 @@ $img: 'sprite-thing2.png';
 }
 
 @mixin anim($map, $direction: null) {
-	$columns: 5;
-	$rows: 4;
+	$columns: map-get($map, 'columns');
+	$rows: map-get($map, 'rows');
+	$from:  map-get($map, 'from');
+	$through:  map-get($map, 'through');
+	$duration: map-get($map, 'duration');
+	$image: map-get($map, 'image');
+
+	$axis1: $columns;
+	$axis2: $rows;
 
 	$spriteWidth: 800px;
 	$spriteHeight: 320px;
-	
+
 	$width: $spriteWidth / $columns;
 	$height: $spriteHeight / $rows;
-	
-	$image: map-get($map, 'image');
+
+	$random: 'anim-#{random(9999999)}';
 
 	width: $width;
 	height: $height;
 	background-image: url($image);
 	background-repeat: no-repeat;
-	
-	$duration: map-get($map, 'duration');
-	
-	$random: 'anim-#{random(9999999)}';
-	
 	animation: #{$random} $duration steps(1) forwards;
 
 	@if ($direction == 'reverse') {
 		animation-direction: reverse;
 	}
 
+	@if ($through == 'rows') {
+		$axis1: $rows;
+		$axis2: $columns;
+	}
+
 	@include keyframe-test($random) {
 		$counter: -1;
+		$position: 0 0;
 
-		@for $i from 1 through $rows {
-			@for $j from 1 through $columns {
+		@for $i from 1 through $axis1 {
+			@for $j from 1 through $axis2 {
 				$counter: $counter + 1;
 
-				$keyframe: $counter / ($rows * $columns) * 100%;
-				$position: ($width + $width * $j * -1) ($height - $height * $i);
+				$keyframe: $counter / ($axis1 * $axis2) * 100%;
+
+				@if ($from == 'top') {
+					@if ($through == 'columns') {
+						$position: ($width + $width * $i * -1) ($height + $height * $j * -1);
+					}
+
+					@if ($through == 'rows') {
+						$position: ($width + $width * $j * -1) ($height - $height * $i);
+					}
+				}
 
 				#{$keyframe} {
 					background-position: $position;
 				}
+			}
 
-				@if ($i == $rows) and ($j == $columns) {
-					100% {
-						background-position: $position;
-					}
+			@if ($i == $axis1) {
+				100% {
+					background-position: $position;
 				}
 			}
 		}
-		$counter: $counter + 1;
 	}
 
-	// background-position: 0 0;
-	
-	// @include keyframe-test($random) {
-	// 	0% {
-	// 		background-position: 0 0;
-	// 	}
-
-	// 	10% {
-	// 		background-position: -160px 0;
-	// 	}
-		
-	// 	20% {
-	// 		background-position: -320px 0;
-	// 	}
-		
-	// 	30% {
-	// 		background-position: -480px 0;
-	// 	}
-		
-	// 	40% {
-	// 		background-position: -640px 0;
-	// 	}
-
-		
-	// 	50% {
-	// 		background-position: 0 -80px;
-	// 	}
-		
-	// 	60% {
-	// 		background-position: -160px -80px;
-	// 	}
-		
-	// 	70% {
-	// 		background-position: -320px -80px;
-	// 	}
-		
-	// 	80% {
-	// 		background-position: -480px -80px;
-	// 	}
-		
-	// 	90% {
-	// 		background-position: -640px -80px;
-	// 	}
-		
-	// 	100% {
-	// 		background-position: -640px -80px;
-	// 	}
-		
-	// }
-	
-	/* 
-	
-	bottom to top
-	    background-position: 0 -320px;
-    /* background-position: 0 -240px; */
-    /* background-position: 0 -160px; */
-    /* background-position: 0 0; */
-	
-	
-	
 }
