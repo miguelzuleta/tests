@@ -1,41 +1,41 @@
-let append = prop => {
-    let parentElement = prop.parent;
-    let childElement = document.createElement(prop.child);
-    let text = document.createTextNode(prop.text);
-
-    for (let key in prop.attrs) {
-        childElement.setAttribute(key, prop.attrs[key]);
-    }
-
-    if (prop.parent === undefined || prop.child === undefined) {
-        throw Error('parent or child properties missing from append()');
-    }
-
-    if (prop.text) {
-        childElement.appendChild(text);
-    }
-
-    parentElement.appendChild(childElement);
-}
-
- let load = file => {
-    return new Promise(resolve => {
-        let getData = fetch(file)
-                        .then(response => response.json())
-                        .then(content => resolve(content));
-    });
-}
-
-let appendToDOM = data => {
+let appendToDOM = () => {
     let el = {
         main: document.querySelector('main'),
         list: null,
         icon: null
     };
 
+    let _load = file => {
+        return new Promise(resolve => {
+            let getData = fetch(file)
+                            .then(response => response.json())
+                            .then(content => resolve(content));
+        });
+    }
+
+    let _append = prop => {
+        let parentElement = prop.parent;
+        let childElement = document.createElement(prop.child);
+        let text = document.createTextNode(prop.text);
+
+        for (let key in prop.attrs) {
+            childElement.setAttribute(key, prop.attrs[key]);
+        }
+
+        if (prop.parent === undefined || prop.child === undefined) {
+            throw Error('parent or child properties missing from _append()');
+        }
+
+        if (prop.text) {
+            childElement.appendChild(text);
+        }
+
+        parentElement.appendChild(childElement);
+    }
+
     let _appendTitle = data => {
         return new Promise(resolve => {
-            append({
+            _append({
                 parent: el.main,
                 child: 'h2',
                 text: 'Magical Title',
@@ -51,7 +51,7 @@ let appendToDOM = data => {
     let _appendList = data => {
 
         return new Promise(resolve => {
-            append({
+            _append({
                 parent: el.main,
                 child: 'ul',
                 attrs: {
@@ -67,7 +67,7 @@ let appendToDOM = data => {
 
                 let { text, icon } = data.list[elem];
 
-                append({
+                _append({
                     parent: el.list,
                     child: 'li',
                     text: `${text} `,
@@ -78,7 +78,7 @@ let appendToDOM = data => {
 
 
                 el.icon = el.list.querySelector(`.item-${elem}`);
-                append({
+                _append({
                     parent: el.icon,
                     child: 'span',
                     text: icon,
@@ -98,7 +98,7 @@ let appendToDOM = data => {
 
     let render = () => {
         return new Promise(resolve => {
-            load('./data.json').then(data => {
+            _load('./data.json').then(data => {
                 let promises = [
                     _appendTitle(data),
                     _appendList(data)
@@ -115,7 +115,7 @@ let appendToDOM = data => {
     return { render };
 }
 
-let addAllElements = appendToDOM().render()
+let addAllElements = appendToDOM().render();
 
 addAllElements.then(() => {
     console.log('ALL DONE!');
