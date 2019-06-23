@@ -1,78 +1,122 @@
-let renderList = () => {
-    let _load = file => {
-        return new Promise(resolve => {
-            let getData = fetch(file)
-                            .then(response => response.json())
-                            .then(content => resolve(content));
-        });
+let append = prop => {
+    let parentElement = prop.parent;
+    let childElement = document.createElement(prop.child);
+    let text = document.createTextNode(prop.text);
+
+    for (let key in prop.attrs) {
+        childElement.setAttribute(key, prop.attrs[key]);
     }
 
-    let _render = prop => {
-        let parentElement = prop.parent;
-        let childElement = document.createElement(prop.child);
-        let text = document.createTextNode(prop.text);
+    if (prop.parent === undefined || prop.child === undefined) {
+        throw Error('parent or child properties missing from append()');
+    }
 
-        for (let key in prop.attrs) {
-            childElement.setAttribute(key, prop.attrs[key]);
-        }
+    if (prop.text) {
+        childElement.appendChild(text);
+    }
 
-        if (prop.parent === undefined || prop.child === undefined) {
-            throw Error('parent or child properties missing from _render()');
-        }
+    parentElement.appendChild(childElement);
+}
 
-        if (prop.text) {
-            childElement.appendChild(text);
-        }
+ let load = file => {
+    return new Promise(resolve => {
+        let getData = fetch(file)
+                        .then(response => response.json())
+                        .then(content => resolve(content));
+    });
+}
 
-        parentElement.appendChild(childElement);
+let appendToDOM = data => {
+    let el = {
+        main: document.querySelector('main'),
+        list: null,
+        icon: null
+    };
+
+    let _appendTitle = data => {
+        return new Promise(resolve => {
+            append({
+                parent: el.main,
+                child: 'h2',
+                text: 'Magical Title',
+                attrs: {
+                    class: 'main-title'
+                }
+            });
+
+            resolve();
+        });
     }
 
     let _appendList = data => {
 
-        let main = document.querySelector('main');
-        _render({
-            parent: main,
-            child: 'ul',
-            attrs: {
-                class: 'main-list'
+        return new Promise(resolve => {
+            append({
+                parent: el.main,
+                child: 'ul',
+                attrs: {
+                    class: 'main-list'
+                }
+            });
+
+            el.list = el.main.querySelector('ul');
+            let elemCount = 0;
+
+            for (let elem in data.list) {
+                elemCount++;
+
+                let { text, icon } = data.list[elem];
+
+                append({
+                    parent: el.list,
+                    child: 'li',
+                    text: `${text} `,
+                    attrs: {
+                        class: `item item-${elem}`
+                    }
+                });
+
+
+                el.icon = el.list.querySelector(`.item-${elem}`);
+                append({
+                    parent: el.icon,
+                    child: 'span',
+                    text: icon,
+                    attrs: {
+                        class: `icon icon-${elem}`
+                    }
+                });
+
+                console.log(elemCount === Object.keys(data.list).length)
+
+                if (elemCount === Object.keys(data.list).length) {
+                    resolve();
+                }
             }
         });
-
-        let mainList = main.querySelector('ul');
-
-        for (let elem in data.list) {
-
-            let { text, icon } = data.list[elem];
-
-            _render({
-                parent: mainList,
-                child: 'li',
-                text: `${text} `,
-                attrs: {
-                    class: `item item-${elem}`
-                }
-            });
-
-
-            let listIcon = mainList.querySelector(`.item-${elem}`);
-            _render({
-                parent: listIcon,
-                child: 'span',
-                text: icon,
-                attrs: {
-                    class: `icon icon-${elem}`
-                }
-            });
-        }
     }
 
-    let init = () => {
-        _load('./data.json').then(data => {
-            _appendList(data);
+    let render = () => {
+        return new Promise(resolve => {
+            load('./data.json').then(data => {
+                let promises = [
+                    _appendTitle(data),
+                    _appendList(data)
+                ];
+
+                 Promise.all(promises).then(() => {
+                    console.log('All promises solved.');
+                    resolve();
+                });
+            });
         });
     }
 
-    return { init };
+    return { render };
 }
 
-renderList().init();
+let addAllElements = appendToDOM().render()
+
+addAllElements.then(() => {
+    console.log('ALL DONE!');
+});
