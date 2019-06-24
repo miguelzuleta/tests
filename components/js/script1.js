@@ -87,8 +87,6 @@ let appendToDOM = () => {
                     }
                 });
 
-                console.log(elemCount === Object.keys(data.list).length)
-
                 if (elemCount === Object.keys(data.list).length) {
                     resolve();
                 }
