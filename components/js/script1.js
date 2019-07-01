@@ -100,10 +100,10 @@ let listSection = data => {
 
 let loadData = load('./data.json');
 
-let render = fn => {
+let render = promises => {
     return new Promise(resolve => {
         console.log('rendering...');
-        Promise.all(fn).then(() => {
+        Promise.all(promises).then(() => {
             resolve();
         });
     });
