@@ -1,16 +1,16 @@
 let main = document.querySelector('main');
 
 let traverse = (elem, callback) => {
-    let elemChildren = elem.children ? Array.from(elem.children) : null;
+    let elemArray = Array.from(elem.children);
 
-   if (elemChildren) {
-    elemChildren.forEach(childElem => {
+   for (let i = 0; i < elemArray.length; i++) {
+        let childElem = elemArray[i];
+
         callback(childElem);
 
         if (childElem.children.length) {
             traverse(childElem, callback);
         }
-    });
    }
 };
 
