@@ -1,6 +1,6 @@
 {
-    "root": "./",
-    "test-01": {
+    "root": "/Users/mzuleta/Desktop/tests/test-01",
+    "main-folder-01": {
         "folder-01": {
             "text-01.txt": {
                 "type": "text",
