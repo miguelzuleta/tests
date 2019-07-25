@@ -1,0 +1,77 @@
+{
+    "root": "/Users/mzuleta/Desktop/tests/structure",
+    "structure": {
+        "str-05": {
+            "folder-01": {
+                "text-01.txt": {
+                    "content": "lorem ipsum"
+                },
+                "mz-data.json": {
+                    "remote": true,
+                    "content": "https://miguelzuleta.com/data.json"
+                },
+                "posts.json": {
+                    "remote": true,
+                    "content": "https://jsonplaceholder.typicode.com/posts"
+                },
+                "mz-data-2.json": {
+                    "remote": true,
+                    "content": "https://miguelzuleta.com/data.json"
+                },
+                "new-magical-folder": {
+                    "posts-magica.json": {
+                        "remote": true,
+                        "content": "https://jsonplaceholder.typicode.com/posts"
+                    }
+                }
+            },
+            "folder-02": {
+                "mz-js.js": {
+                    "remote": true,
+                    "content": "https://miguelzuleta.com/js.js"
+                },
+                "text-02.txt": {
+                    "content": "lorem ipsum from text 02"
+                },
+                "comments.json": {
+                    "remote": true,
+                    "content": "https://jsonplaceholder.typicode.com/comments"
+                },
+                "folder-02-subfolder": {
+                    "mz-css.css": {
+                        "remote": true,
+                        "content": "https://miguelzuleta.com/styles.css"
+                    },
+                    "albums.json": {
+                        "remote": true,
+                        "content": "https://jsonplaceholder.typicode.com/albums"
+                    },
+                    "photos.json": {
+                        "remote": true,
+                        "content": "https://jsonplaceholder.typicode.com/photos"
+                    },
+                    "sub-text-02.txt": {
+                        "content": "subfolder thing"
+                    },
+                    "folder-02-subfolder-sub": {
+                        "sub-mz-css.css": {
+                            "remote": true,
+                            "content": "https://miguelzuleta.com/styles.css"
+                        },
+                        "sub-albums.json": {
+                            "remote": true,
+                            "content": "https://jsonplaceholder.typicode.com/albums"
+                        },
+                        "sub-photos.json": {
+                            "remote": true,
+                            "content": "https://jsonplaceholder.typicode.com/photos"
+                        },
+                        "sub-sub-text-02.txt": {
+                            "content": "subfolder thing"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
