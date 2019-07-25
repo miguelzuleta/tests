@@ -58,10 +58,8 @@ fetch(testJSON).then(jsonFile => {
                         fileStructure(newPath, subFolder);
                     })
                 } else {
-                    let fileType = subFolder.type;
-
                     let writeFile = fileContent => {
-                        fs.writeFile(newPath, subFolder.content, err => {
+                        fs.writeFile(newPath, fileContent, err => {
                             if (err) {
                                 throw err;
                             }
@@ -70,14 +68,12 @@ fetch(testJSON).then(jsonFile => {
                         });
                     };
 
-                    if (fileType === 'text') {
-                        writeFile(subFolder.content);
-                    } else if (fileType === 'fetch') {
+                    if (subFolder.hasOwnProperty('remote')) {
                         fetch(subFolder.content).then(fetchedContent => {
-                             writeFile(fetchedContent);
+                            writeFile(fetchedContent);
                         });
                     } else {
-                        throw `${fileType} is not a correct file type`;
+                        writeFile(subFolder.content);
                     }
                     
                 }
