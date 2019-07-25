@@ -25,14 +25,37 @@ let fetch = url => {
     });
 };
 
-fetch('./structure/test-01/test-01.json').then(data => {
-    console.log(JSON.parse(data));
-});
+let testJSON = './structure/test-01/test-01.json';
+// let testJSON = 'https://raw.githubusercontent.com/miguelzuleta/tests/node-file-structure/structure/test-01/test-01.json';
 
-fetch('https://miguelzuleta.com/data.json').then(data => {
-    console.log(JSON.parse(data));
-});
+fetch(testJSON).then(jsonFile => {
+    let data = JSON.parse(jsonFile);
+    let root = data.root;
+    let structure = data.structure;
 
-fetch('https://jsonplaceholder.typicode.com/comments').then(data => {
-    console.log(JSON.parse(data));
+    let fileStructure = (rootPath, structureObj) => {
+        // console.log(data.root)
+        // let newPath = rootPath;
+
+        for (let folder in structureObj) {
+            let subFolder = structureObj[folder];
+            let isFolder = (folder.indexOf('.') < 0) && (typeof subFolder === 'object');
+            // console.log(subFolder)
+            let newPath = `${rootPath}/${folder}`;
+            console.log(newPath);
+
+            if (isFolder) {
+                // console.log(newPath, folder)
+                console.log(`FOLDER: ${folder}`);
+                
+                // fs.mkdir('', err => {
+                    fileStructure(newPath, subFolder);
+                // })
+            } else {
+                console.log(`FILE: ${folder}`);
+            }
+        }
+    };
+
+    fileStructure(root, structure);
 });
