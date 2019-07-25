@@ -8,7 +8,7 @@
             },
             "mz-data.json": {
                 "type": "fetch",
-                "content": "http://miguelzuleta.com/data.json"
+                "content": "https://miguelzuleta.com/data.json"
             },
             "posts.json": {
                 "type": "fetch",
@@ -18,7 +18,7 @@
         "folder-02": {
             "mz-js.js": {
                 "type": "fetch",
-                "content": "http://miguelzuleta.com/js.js"
+                "content": "https://miguelzuleta.com/js.js"
             },
             "text-02.txt": {
                 "type": "text",
@@ -31,7 +31,7 @@
             "folder-02-subfolder": {
                 "mz-css.css": {
                     "type": "fetch",
-                    "content": "http://miguelzuleta.com/styles.css"
+                    "content": "https://miguelzuleta.com/styles.css"
                 },
                 "albums.json": {
                     "type": "fetch",
@@ -44,6 +44,24 @@
                 "sub-text-02.txt": {
                     "type": "text",
                     "content": "subfolder thing"
+                },
+                "folder-02-subfolder-sub": {
+                    "sub-mz-css.css": {
+                        "type": "fetch",
+                        "content": "https://miguelzuleta.com/styles.css"
+                    },
+                    "sub-albums.json": {
+                        "type": "fetch",
+                        "content": "https://jsonplaceholder.typicode.com/albums"
+                    },
+                    "sub-photos.json": {
+                        "type": "fetch",
+                        "content": "https://jsonplaceholder.typicode.com/photos"
+                    },
+                    "sub-sub-text-02.txt": {
+                        "type": "text",
+                        "content": "subfolder thing"
+                    }
                 }
             }
         }
