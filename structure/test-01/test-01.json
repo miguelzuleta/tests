@@ -13,6 +13,16 @@
             "posts.json": {
                 "type": "fetch",
                 "content": "https://jsonplaceholder.typicode.com/posts"
+            },
+            "mz-data-2.json": {
+                "type": "fetch",
+                "content": "https://miguelzuleta.com/data.json"
+            },
+            "new-magical-folder": {
+                "posts-magic.json": {
+                    "type": "fetch",
+                    "content": "https://jsonplaceholder.typicode.com/posts"
+                }
             }
         },
         "folder-02": {

@@ -45,11 +45,13 @@ fetch(testJSON).then(jsonFile => {
             let fileType = isFolder ? 'Folder' : 'File';
             // console.log(subFolder)
             let newPath = `${rootPath}/${folder}`;
-            // console.log(newPath);
+            console.log(newPath, fs.existsSync(newPath));
 
             if (fs.existsSync(newPath)) {
                 console.log(`${fileType} "${folder}" already exists. Skipping...`);
-                fileStructure(newPath, subFolder);
+                if (isFolder) {
+                    fileStructure(newPath, subFolder);
+                }
             } else {
                 if (isFolder) {
                     console.log(`Creating folder "${folder}"`);
@@ -66,7 +68,7 @@ fetch(testJSON).then(jsonFile => {
                     // console.log(`FILE: ${folder}`);
                     // console.log(`Creating file "${folder}"`);
                     let fileType = subFolder.type;
-                    console.log(subFolder);
+                    console.log('why is this here!', folder);
 
                     if (fileType === 'text') {
                         fs.writeFile(newPath, subFolder.content, err => {
