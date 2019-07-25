@@ -1,5 +1,7 @@
 let fs = require('fs');
 let https = require('https');
+// let path = require('path');
+// console.log(__dirname)
 
 let fetch = url => {
     let isURL = (url.indexOf('http') === 0);
@@ -42,17 +44,22 @@ fetch(testJSON).then(jsonFile => {
             let isFolder = (folder.indexOf('.') < 0) && (typeof subFolder === 'object');
             // console.log(subFolder)
             let newPath = `${rootPath}/${folder}`;
-            console.log(newPath);
+            // console.log(newPath);
 
             if (isFolder) {
-                // console.log(newPath, folder)
+                console.log(newPath)
                 console.log(`FOLDER: ${folder}`);
                 
-                // fs.mkdir('', err => {
-                    fileStructure(newPath, subFolder);
-                // })
+                fs.mkdir(newPath, err => {
+                    if (err) {
+                        throw err;
+                    } else {
+                        fileStructure(newPath, subFolder);
+                    }
+                })
             } else {
                 console.log(`FILE: ${folder}`);
+                
             }
         }
     };
