@@ -1,7 +1,5 @@
 let fs = require('fs');
 let https = require('https');
-// let path = require('path');
-// console.log(__dirname)
 
 let fetch = url => {
     let isURL = (url.indexOf('http') === 0);
@@ -36,57 +34,47 @@ fetch(testJSON).then(jsonFile => {
     let structure = data.structure;
 
     let fileStructure = (rootPath, structureObj) => {
-        // console.log(data.root)
-        // let newPath = rootPath;
-
         for (let folder in structureObj) {
             let subFolder = structureObj[folder];
             let isFolder = (folder.indexOf('.') < 0) && (typeof subFolder === 'object');
-            let fileType = isFolder ? 'Folder' : 'File';
-            // console.log(subFolder)
+            let fileType = isFolder ? 'folder' : 'file';
             let newPath = `${rootPath}/${folder}`;
-            console.log(newPath, fs.existsSync(newPath));
 
             if (fs.existsSync(newPath)) {
                 console.log(`${fileType} "${folder}" already exists. Skipping...`);
+
                 if (isFolder) {
                     fileStructure(newPath, subFolder);
                 }
             } else {
                 if (isFolder) {
-                    console.log(`Creating folder "${folder}"`);
-                    // console.log(`FOLDER: ${folder}`);
+                    console.log(`Creating ${fileType} "${folder}"`);
                     
                     fs.mkdir(newPath, err => {
                         if (err) {
                             throw err;
-                        } else {
-                            fileStructure(newPath, subFolder);
                         }
+
+                        fileStructure(newPath, subFolder);
                     })
                 } else {
-                    // console.log(`FILE: ${folder}`);
-                    // console.log(`Creating file "${folder}"`);
                     let fileType = subFolder.type;
-                    console.log('why is this here!', folder);
 
-                    if (fileType === 'text') {
+                    let writeFile = fileContent => {
                         fs.writeFile(newPath, subFolder.content, err => {
                             if (err) {
                                 throw err;
-                            } else {
-                                console.log(`"${folder}" created.`)
                             }
+
+                            console.log(`Creating "${folder}"`);
                         });
+                    };
+
+                    if (fileType === 'text') {
+                        writeFile(subFolder.content);
                     } else if (fileType === 'fetch') {
                         fetch(subFolder.content).then(fetchedContent => {
-                            fs.writeFile(newPath, fetchedContent, err => {
-                                if (err) {
-                                    throw err;
-                                } else {
-                                    console.log(`"${folder}" created.`)
-                                }
-                            });
+                             writeFile(fetchedContent);
                         });
                     } else {
                         throw `${fileType} is not a correct file type`;

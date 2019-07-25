@@ -19,7 +19,7 @@
                 "content": "https://miguelzuleta.com/data.json"
             },
             "new-magical-folder": {
-                "posts-magic.json": {
+                "posts-magica.json": {
                     "type": "fetch",
                     "content": "https://jsonplaceholder.typicode.com/posts"
                 }
