@@ -5,13 +5,11 @@
                 "content": "lorem ipsum"
             },
             "mz-data.json": {
-                "remote": true,
-                "content": "https://miguelzuleta.com/data.json"
+                "content": "ak slmdlks mdks"
             },
             "new-magical-folder": {
                 "posts-magica.json": {
-                    "remote": true,
-                    "content": "https://jsonplaceholder.typicode.com/posts"
+                    "content": "ks skdmls ksl smdks lm"
                 }
             }
         }

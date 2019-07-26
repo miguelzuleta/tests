@@ -35,32 +35,40 @@ let buildFileStructure = json => {
             };
 
             let fileStructure = (rootPath, structureObj) => {
-                for (let folder in structureObj) {
-                    let subFolder = structureObj[folder];
-                    let isFolder = (folder.indexOf('.') < 0) && (typeof subFolder === 'object');
+                for (let finderItem in structureObj) {
+                    let item = structureObj[finderItem];
+                    let newPath = `${rootPath}/${finderItem}`;
+
+                    let isFolder = (finderItem.indexOf('.') < 0) && (typeof item === 'object');
                     let fileType = isFolder ? 'folder' : 'file';
-                    let newPath = `${rootPath}/${folder}`;
+
+                    let fileCountInFolder = Object.keys(item).filter(file => {
+                        return file.indexOf('.') > 0;
+                    }).length;
 
                     if (fs.existsSync(newPath)) {
-                        console.log(`${fileType} "${folder}" already exists. Skipping...`);
+                        console.log(`${fileType} "${finderItem}" already exists. Skipping...`);
 
                         if (isFolder) {
-                            fileStructure(newPath, subFolder);
+                            fileCount.fromFolders += fileCountInFolder;
+                            fileStructure(newPath, item);
+                        } else {
+                            fileCount.writtenFiles++;
+
+                            if (fileCount.fromFolders === fileCount.writtenFiles) {
+                                resolve();
+                            }
                         }
                     } else {
                         if (isFolder) {
-                            console.log(`Creating ${fileType} "${folder}"`);
-                            
+                            console.log(`Creating ${fileType} "${finderItem}"`);
+
                             fs.mkdir(newPath, err => {
                                 if (err) throw err;
 
-                                let fileCountInFolder = Object.keys(subFolder).filter(file => {
-                                    return file.indexOf('.') > 0;
-                                }).length;
-
                                 fileCount.fromFolders += fileCountInFolder;
 
-                                fileStructure(newPath, subFolder);
+                                fileStructure(newPath, item);
                             })
                         } else {
                             let writeFile = fileContent => {
@@ -69,7 +77,7 @@ let buildFileStructure = json => {
 
                                     fileCount.writtenFiles++;
 
-                                    console.log(`Creating ${fileType} "${folder}"`);
+                                    console.log(`Creating ${fileType} "${finderItem}"`);
 
                                     if (fileCount.fromFolders === fileCount.writtenFiles) {
                                         resolve();
@@ -77,14 +85,14 @@ let buildFileStructure = json => {
                                 });
                             };
 
-                            if (subFolder.hasOwnProperty('remote')) {
-                                fetch(subFolder.content).then(fetchedContent => {
+                            if (item.hasOwnProperty('remote')) {
+                                fetch(item.content).then(fetchedContent => {
                                     writeFile(fetchedContent);
                                 });
                             } else {
-                                writeFile(subFolder.content);
+                                writeFile(item.content);
                             }
-                            
+
                         }
                     }
                 }
@@ -95,6 +103,6 @@ let buildFileStructure = json => {
     });
 }
 
-buildFileStructure(`./test-01.json`).then(() => {
+buildFileStructure(`./test-02.json`).then(() => {
     console.log('DONE!')
 });
