@@ -1,5 +1,6 @@
 let fs = require('fs');
 let https = require('https');
+let path = require('path');
 
 let fetch = url => {
     let isURL = (url.indexOf('http') === 0);
@@ -29,6 +30,7 @@ let buildFileStructure = json => {
     return new Promise(resolve => {
         fetch(json).then(jsonFile => {
             let data = JSON.parse(jsonFile);
+            let imageFiles = ['png', 'jpg', 'jpeg', 'gif'];
             let fileCount = {
                 fromFolders: 0,
                 writtenFiles: 0
@@ -71,26 +73,43 @@ let buildFileStructure = json => {
                                 fileStructure(newPath, item);
                             })
                         } else {
-                            let writeFile = fileContent => {
-                                fs.writeFile(newPath, fileContent, err => {
-                                    if (err) throw err;
+                            let isImage = imageFiles.includes(finderItem.split('.')[1]);
 
-                                    fileCount.writtenFiles++;
+                            let createFile = fileContent => {
+                                if (isImage) {
+                                    console.log(`Creating image "${finderItem}"`);
 
-                                    console.log(`Creating ${fileType} "${finderItem}"`);
+                                    let inStream = fs.createReadStream(path.join(__dirname, fileContent));
+                                    let outStream = fs.createWriteStream(newPath);
 
-                                    if (fileCount.fromFolders === fileCount.writtenFiles) {
-                                        resolve();
-                                    }
-                                });
+                                    inStream.pipe(outStream);
+                                    inStream.on('close', () => {
+                                        fileCount.writtenFiles++;
+                                        if (fileCount.fromFolders === fileCount.writtenFiles) {
+                                            resolve();
+                                        }
+                                    });
+                                } else {
+                                    fs.writeFile(newPath, fileContent, err => {
+                                        if (err) throw err;
+
+                                        fileCount.writtenFiles++;
+
+                                        console.log(`Creating ${fileType} "${finderItem}"`);
+
+                                        if (fileCount.fromFolders === fileCount.writtenFiles) {
+                                            resolve();
+                                        }
+                                    });
+                                }
                             };
 
                             if (item.hasOwnProperty('remote')) {
                                 fetch(item.content).then(fetchedContent => {
-                                    writeFile(fetchedContent);
+                                    createFile(fetchedContent);
                                 });
                             } else {
-                                writeFile(item.content);
+                                createFile(item.content);
                             }
 
                         }

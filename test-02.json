@@ -1,6 +1,9 @@
 {
     "structure": {
         "folder-01": {
+            "new-test-image-02.png": {
+                "content": "images/image-02.png"
+            },
             "text-01.txt": {
                 "content": "lorem ipsum"
             },
@@ -11,8 +14,8 @@
                 "posts-magica.json": {
                     "content": "ks skdmls ksl smdks lm"
                 },
-                "posts-magica.json": {
-                    "content": "ks skdmls ksl smdks lm"
+                "new-test-image-01.png": {
+                    "content": "images/image-01.png"
                 },
                 "poeica.json": {
                     "content": "ks skdmls ksl smdks lm"
