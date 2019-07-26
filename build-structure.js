@@ -25,13 +25,10 @@ let fetch = url => {
     });
 };
 
-let json01 = './test-01.json';
-
-let builtStructure = json => {
+let buildFileStructure = json => {
     fetch(json).then(jsonFile => {
         let data = JSON.parse(jsonFile);
-        let root = data.root;
-        let structure = data.structure;
+        let structure = data;
 
         let fileStructure = (rootPath, structureObj) => {
             for (let folder in structureObj) {
@@ -81,10 +78,8 @@ let builtStructure = json => {
             }
         };
 
-        fileStructure(root, structure);
+        fileStructure(__dirname, structure);
     });
 }
 
-for (let i = 0; i < 5; i++) {
-    builtStructure(`./test-0${i + 1}.json`);
-}
+buildFileStructure(`./test-01.json`);

@@ -1,8 +1,7 @@
 {
-    "root": "/Users/mzuleta/Desktop/tests/structure",
     "structure": {
-        "str-02": {
-            "folder-01": {
+        "str-03": {
+            "folder-03": {
                 "text-01.txt": {
                     "content": "lorem ipsum"
                 },
@@ -72,6 +71,12 @@
                     }
                 }
             }
+        }
+    },
+    "another-test-folder": {
+        "sub-mz-css.css": {
+            "remote": true,
+            "content": "https://miguelzuleta.com/styles.css"
         }
     }
 }
