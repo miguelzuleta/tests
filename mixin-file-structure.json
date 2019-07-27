@@ -1,0 +1,57 @@
+{
+	"assets": {
+		"images": {
+			"**dashed**": {
+				"image_large.png": {
+					"content": "./placeholder-files/image_large.png"
+				},
+				"image_medium.png": {
+					"content": "./placeholder-files/image_medium.png"
+				},
+				"image_small.png": {
+					"content": "./placeholder-files/image_small.png"
+				}
+			}
+		}
+	},
+	"site": {
+		"**dashed**": {
+			"index.html": {
+				"remote": true,
+				"content": "./placeholder-files/markup.html"
+			}
+		}
+	},
+	"src": {
+		"js": {
+			"**dashed**.js": {
+				"content": "console.log('**dashed**()')"
+			}
+		},
+		"scss": {
+			"mixin": {
+				"**dashed**": {
+					"code-samples": {
+						"built": {},
+						"_sample.scss": {
+							"remote": true,
+							"content": "./placeholder-files/sample.scss"
+						}
+					},
+					"_**dashed**.scss": {
+						"remote": true,
+						"content": "./placeholder-files/mixin.scss"
+					},
+					"_site.scss": {
+						"remote": true,
+						"content": "./placeholder-files/site.scss"
+					}
+				}
+			},
+			"**dashed**.scss": {
+				"remote": true,
+				"content": "./placeholder-files/root.scss"
+			}
+		}
+	}
+}

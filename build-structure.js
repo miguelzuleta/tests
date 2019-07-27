@@ -122,6 +122,6 @@ let buildFileStructure = json => {
     });
 }
 
-buildFileStructure(`./test-02.json`).then(() => {
+buildFileStructure(`./mixin-file-structure.json`).then(() => {
     console.log('DONE!')
 });

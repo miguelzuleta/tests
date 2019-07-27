@@ -1,0 +1,5 @@
+@import '../**dashed**';
+
+.elem {
+  @include **dashed**(20px, blue);
+}
