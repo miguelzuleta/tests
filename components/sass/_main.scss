@@ -1,30 +1,36 @@
-$deckSuits: ('spade', 'heart', 'club', 'diamond');
-$cardValues: ('A', 'K', 'Q', 'J', '10', '9','8', '7', '6', '5', '4', '3', '2');
+$deck-suits: ('spade', 'heart', 'club', 'diamond');
+$card-values: ('A', 'K', 'Q', 'J', '10', '9','8', '7', '6', '5', '4', '3', '2');
+$bg-color: #0e3233;
 
 body {
-	background-color: #0e3233;
+	margin: 0;
+	padding: 0;
+	background-color: $bg-color;
 }
 
 section {
+	height: 100vh;
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 
 	> div {
 		background-color: cadetblue;
 		padding: 10px;
-		margin: 10px;
+		margin: 10px 10px 0;
 		border-radius: 4px;
 
 		.deck .card {
 			$width: 80px;
+
 			width: $width;
 			height: 1.25 * $width;
 			background-repeat: no-repeat;
 			background-size: cover;
 			margin-left: -2px;
 
-			@each $suit in $deckSuits {
-				@each $value in $cardValues {
+			@each $suit in $deck-suits {
+				@each $value in $card-values {
 					&.#{$suit}-#{$value} {
 						background-image: url(cards/#{$suit}-#{$value}.svg);
 					}
@@ -54,9 +60,8 @@ section {
 		text-align: center;
 		font-family: sans-serif;
 		text-transform: uppercase;
-		color: #fff;
-		font-weight: 400;
+		color: $bg-color;
 		letter-spacing: 6px;
-		font-size: 18px;
+		font-size: 15px;
 	}
 }
