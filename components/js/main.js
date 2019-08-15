@@ -10,7 +10,7 @@ class DeckOfCards {
 			shuffled: []
 		};
 
-		this.deckSuits = ['spade', 'heart', 'diamond', 'club'];
+		this.deckSuits = ['spade', 'heart', 'club', 'diamond'];
 
 		this.cardValues = [
 			'A', 'K', 'Q', 'J', '10', '9','8', '7', '6', '5', '4', '3', '2'
@@ -41,7 +41,6 @@ class DeckOfCards {
 	}
 
 	toDOM(elem, key) {
-		// elem.innerHTML += `<p><span>${key.card}</span> of <span>${key.suit}</span></p>`;
 		elem.innerHTML += `<div class="card ${key.suit}-${key.card}"></div>`;
 	}
 
