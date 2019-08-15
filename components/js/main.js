@@ -16,13 +16,13 @@ class DeckOfCards {
 			'A', 'K', 'Q', 'J', '10', '9','8', '7', '6', '5', '4', '3', '2'
 		];
 
-		this.sortedColumn = document.querySelector('.sorted .deck');
-		this.shuffledColumn = document.querySelector('.shuffled .deck');
+		this.sortedRow = document.querySelector('.sorted .deck');
+		this.shuffledRow = document.querySelector('.shuffled .deck');
 	}
 
 	buildDeck() {
 		this.deckSuits.forEach(suit => {
-			this.cardValues.forEach(card => {
+			this.cardValues.forEach(value => {
 				let random = Math.random();
 
 				this.order.sorted.push(random);
@@ -30,7 +30,7 @@ class DeckOfCards {
 
 				this.deck[random] = {
 					suit: suit,
-					card: card
+					value: value
 				}
 			});
 		});
@@ -40,8 +40,8 @@ class DeckOfCards {
 		return this.deck;
 	}
 
-	toDOM(elem, key) {
-		elem.innerHTML += `<div class="card ${key.suit}-${key.card}"></div>`;
+	toDOM(elem, card) {
+		elem.innerHTML += `<div class="card ${card.suit}-${card.value}"></div>`;
 	}
 
 	render() {
@@ -54,8 +54,8 @@ class DeckOfCards {
 
 			keyCount++;
 
-			this.toDOM(this.sortedColumn, deckObj[orderedKey]);
-			this.toDOM(this.shuffledColumn, deckObj[randomKey]);
+			this.toDOM(this.sortedRow, deckObj[orderedKey]);
+			this.toDOM(this.shuffledRow, deckObj[randomKey]);
 		}
 	}
 }
