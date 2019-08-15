@@ -4,11 +4,7 @@
 class DeckOfCards {
 	constructor() {
 		this.deck = {};
-
-		this.order = {
-			sorted: [],
-			shuffled: []
-		};
+		this.shuffle = [];
 
 		this.deckSuits = ['spade', 'heart', 'club', 'diamond'];
 
@@ -16,17 +12,16 @@ class DeckOfCards {
 			'A', 'K', 'Q', 'J', '10', '9','8', '7', '6', '5', '4', '3', '2'
 		];
 
-		this.sortedRow = document.querySelector('.sorted .deck');
-		this.shuffledRow = document.querySelector('.shuffled .deck');
+		this.sortedDeck = document.querySelector('.sorted .deck');
+		this.shuffledDeck = document.querySelector('.shuffled .deck');
 	}
 
 	buildDeck() {
 		this.deckSuits.forEach(suit => {
 			this.cardValues.forEach(value => {
-				let random = Math.random();
+				let random = Math.random().toString();
 
-				this.order.sorted.push(random);
-				this.order.shuffled.push(random);
+				this.shuffle.push(random);
 
 				this.deck[random] = {
 					suit: suit,
@@ -35,7 +30,7 @@ class DeckOfCards {
 			});
 		});
 
-		this.order.shuffled.sort();
+		this.shuffle.sort();
 
 		return this.deck;
 	}
@@ -49,13 +44,12 @@ class DeckOfCards {
 		let keyCount = 0;
 
 		for (let key in deckObj) {
-			let randomKey = this.order.shuffled[keyCount];
-			let orderedKey = this.order.sorted[keyCount];
+			let shuffleKey = this.shuffle[keyCount];
 
 			keyCount++;
 
-			this.toDOM(this.sortedRow, deckObj[orderedKey]);
-			this.toDOM(this.shuffledRow, deckObj[randomKey]);
+			this.toDOM(this.sortedDeck, deckObj[key]);
+			this.toDOM(this.shuffledDeck, deckObj[shuffleKey]);
 		}
 	}
 }
